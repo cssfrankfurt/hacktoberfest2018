@@ -9,7 +9,7 @@
   },
   "husky": {
     "hooks": {
-      "prepush": "yarn lint"
+      "pre-push": "yarn lint"
     }
   },
   "dependencies": {
