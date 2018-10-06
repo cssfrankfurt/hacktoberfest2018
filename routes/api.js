@@ -3,6 +3,8 @@ const router = express.Router();
 const debug = require('debug')('hacktoberfest2018:server');
 const axios = require('axios');
 
+const { afterPush } = require('../util/helpers'); 
+
 const key = process.env.GITHUB_ID;
 const secret = process.env.GITHUB_SECRET;
 const env = process.env.NODE_ENV || 'dev';
@@ -51,9 +53,15 @@ router.get('/callback', async (req, res, next) => {
 
   debug("[AUTH] Got user's access token");
 
-  const result = await octokit.users.get({});
-  
+  const userData = await octokit.users.get({});
+  const login = userData.data.login;
 
+  const newDBUser = {
+    login,
+    accessToken
+  };
+  let userEntry = usersDB.push(newDBUser, afterPush);
+  debug('Firebase generated key: ' + userEntry.key);
 
   res.redirect(rootURL);
 });
