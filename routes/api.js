@@ -3,7 +3,7 @@ const router = express.Router();
 const debug = require('debug')('hacktoberfest2018:server');
 const axios = require('axios');
 
-const { afterPush } = require('../util/helpers'); 
+const { afterPush } = require('../util/helpers');
 
 const key = process.env.GITHUB_ID;
 const secret = process.env.GITHUB_SECRET;
@@ -66,11 +66,11 @@ router.get('/callback', async (req, res, next) => {
   res.redirect(rootURL);
 });
 
-function getRouter (adminRef, octokitRef) {
+function getRouter(adminRef, octokitRef) {
   firebase = adminRef;
   usersDB = firebase.ref('users');
   octokit = octokitRef;
-  
+
   return router;
 }
 
