@@ -5,7 +5,7 @@
   "scripts": {
     "start": "DEBUG=hacktoberfest2018:* nodemon ./bin/www",
     "format": "prettier-eslint --write \"**/*.js\"",
-    "lint": "prettier-eslint \"**/*.js\""
+    "lint": "prettier-eslint -l error --list-different \"**/*.js\""
   },
   "husky": {
     "hooks": {
