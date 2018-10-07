@@ -46,31 +46,31 @@ router.get('/callback', async (req, res, next) => {
 
   let accessToken = null;
   debug("[AUTH] Getting user's access token");
-  
+
   await axios
-  .post('https://github.com/login/oauth/access_token', {
-    client_id: key,
-    client_secret: secret,
-    code: code
-  })
-  .then(response => {
-    accessToken = response.data.split('&')[0].split('token=')[1];
-    octokit.authenticate({
-      type: 'oauth',
-      token: accessToken
+    .post('https://github.com/login/oauth/access_token', {
+      client_id: key,
+      client_secret: secret,
+      code: code
+    })
+    .then(response => {
+      accessToken = response.data.split('&')[0].split('token=')[1];
+      octokit.authenticate({
+        type: 'oauth',
+        token: accessToken
+      });
     });
-  });
-  
+
   debug("[AUTH] Got user's access token");
-  
+
   const userData = await octokit.users.get({});
   const login = userData.data.login;
-  
+
   await usersDB.on(
     'value',
     data => {
       let users = data.val();
-      if(Object.values(users).some(u => u.login === login)) {
+      if (Object.values(users).some(u => u.login === login)) {
         debug('User already in database');
       } else {
         let newDBUser = {
@@ -90,7 +90,7 @@ router.get('/callback', async (req, res, next) => {
       });
     }
   );
-  
+
   res.redirect(rootURL);
 });
 
