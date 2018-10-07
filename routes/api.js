@@ -95,12 +95,13 @@ router.get('/data', async (req, res, next) => {
             prsPerUser[users[i].login] = prsPerUser[users[i].login]
               ? 
               {
-                latest: obj.payload.pull_request.created_at.split('T')[0],
+                ...prsPerUser[users[i].login],
                 prs: prsPerUser[users[i].login].prs + 1
               }
               :
               {
-                latest: obj.payload.pull_request.created_at.split('T')[0],
+                latestPr: obj.payload.pull_request.created_at.split('T')[0],
+                latestProject: obj.repo.name,
                 prs: 1
               };
           }
@@ -114,7 +115,8 @@ router.get('/data', async (req, res, next) => {
         data.push({
           name: username,
           prs: prsPerUser[username].prs,
-          latest: prsPerUser[username].latest
+          latestPr: prsPerUser[username].latestPr,
+          latestProject: prsPerUser[username].latestProject
         })
       }
       res.send(data);
