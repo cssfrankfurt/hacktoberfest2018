@@ -9,7 +9,8 @@ const key = process.env.GITHUB_ID;
 const secret = process.env.GITHUB_SECRET;
 const env = process.env.NODE_ENV || 'dev';
 const rootURL =
-  env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
+  // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
+  env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfest-frankfurt.herokuapp.com';
 const callbackUrl = rootURL + '/api/callback';
 
 let octokit = null;
@@ -119,6 +120,8 @@ router.get('/data', async (req, res, next) => {
           latestProject: prsPerUser[username].latestProject
         })
       }
+
+      
       res.send(data);
     } else {
       res.json({
