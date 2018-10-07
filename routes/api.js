@@ -139,7 +139,7 @@ router.get('/data', async (req, res, next) => {
         });
       }
     } else {
-      await dataDB.on('value', (data) => res.send(data.val()));
+      await dataDB.on('value', data => res.send(data.val()));
     }
   };
 
