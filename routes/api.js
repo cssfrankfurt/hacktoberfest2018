@@ -75,7 +75,7 @@ router.get('/data', async (req, res, next) => {
     users = Object.values(users);
 
     if (users) {
-      let data = {};
+      let prsPerUser = {};
       for (let i = 0; i < users.length; i++) {
         // octokit.authenticate({
         //   type: 'oauth',
@@ -89,14 +89,33 @@ router.get('/data', async (req, res, next) => {
           if (
             obj.type === 'PullRequestEvent' &&
             obj.payload.action === 'opened' &&
-            new Date(obj.payload.pull_request.created_at.split('T').shift()) >
+            new Date(obj.payload.pull_request.created_at.split('T')[0]) >
               new Date('2018-10-01')
           ) {
-            data[users[i].login] = data[users[i].login]
-              ? data[users[i].login] + 1
-              : 1;
+            prsPerUser[users[i].login] = prsPerUser[users[i].login]
+              ? 
+              {
+                latest: obj.payload.pull_request.created_at.split('T')[0],
+                prs: prsPerUser[users[i].login].prs + 1
+              }
+              :
+              {
+                latest: obj.payload.pull_request.created_at.split('T')[0],
+                prs: 1
+              };
           }
         });
+      }
+
+      let data = [];
+      for (let username in prsPerUser) {
+        if (!prsPerUser.hasOwnProperty(username)) continue; // skip prototype properties
+
+        data.push({
+          name: username,
+          prs: prsPerUser[username].prs,
+          latest: prsPerUser[username].latest
+        })
       }
       res.send(data);
     } else {
