@@ -147,7 +147,7 @@ router.get('/data', async (req, res, next) => {
     });
   };
 
-  await lastFetchedDB.on('value', (data) => {
+  await lastFetchedDB.on('value', async (data) => {
     lastfetched = new Date(data.val());
     if (Math.floor(((new Date() - lastfetched)/1000)/60) > 5) {
       await usersDB.on('value', gotAll, errData);
