@@ -81,10 +81,12 @@ router.get('/data', async (req, res, next) => {
     if (users) {
       let prsPerUser = {};
       for (let i = 0; i < users.length; i++) {
-        octokit.authenticate({
-          type: 'oauth',
-          token: '82e84ff3b26a3b5752872c5b318b666cbea3da0a'
-        });
+        if (users[i].accessToken) {
+          octokit.authenticate({
+            type: 'oauth',
+            token: [users[i].accessToken]
+          });
+        }
         const result = await octokit.activity.getEventsForUser({
           username: [users[i].login],
           per_page: 100
