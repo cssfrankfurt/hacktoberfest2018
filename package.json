@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=hacktoberfest2018:* nodemon ./bin/www",
+    "start": "DEBUG=hacktoberfest2018:* node ./bin/www",
+    "dev": "DEBUG=hacktoberfest2018:* nodemon ./bin/www",
     "format": "prettier-eslint --write \"**/*.js\"",
     "lint": "prettier-eslint -l error --list-different \"**/*.js\"",
     "heroku-postbuild": "cd frontend/ && yarn install --production=false && yarn run build",

@@ -9,12 +9,16 @@ const key = process.env.GITHUB_ID;
 const secret = process.env.GITHUB_SECRET;
 const env = process.env.NODE_ENV || 'dev';
 const rootURL =
-  env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
+  // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
+  env === 'dev'
+    ? 'http://localhost:5000'
+    : 'https://hacktoberfest-frankfurt.herokuapp.com';
 const callbackUrl = rootURL + '/api/callback';
 
 let octokit = null;
 let firebase = null;
 let usersDB = null;
+let dataDB = null;
 
 /**
  * GET Login
@@ -75,12 +79,14 @@ router.get('/data', async (req, res, next) => {
     users = Object.values(users);
 
     if (users) {
-      let data = {};
+      let prsPerUser = {};
       for (let i = 0; i < users.length; i++) {
-        octokit.authenticate({
-          type: 'oauth',
-          token: [users[i].accessToken]
-        });
+        if (users[i].accessToken) {
+          octokit.authenticate({
+            type: 'oauth',
+            token: [users[i].accessToken]
+          });
+        }
         const result = await octokit.activity.getEventsForUser({
           username: [users[i].login],
           per_page: 100
@@ -89,15 +95,37 @@ router.get('/data', async (req, res, next) => {
           if (
             obj.type === 'PullRequestEvent' &&
             obj.payload.action === 'opened' &&
-            new Date(obj.payload.pull_request.created_at.split('T').shift()) >
+            new Date(obj.payload.pull_request.created_at.split('T')[0]) >
               new Date('2018-10-01')
           ) {
-            data[users[i].login] = data[users[i].login]
-              ? data[users[i].login] + 1
-              : 1;
+            prsPerUser[users[i].login] = prsPerUser[users[i].login]
+              ? {
+                  ...prsPerUser[users[i].login],
+                  prs: prsPerUser[users[i].login].prs + 1
+                }
+              : {
+                  latestPr: obj.payload.pull_request.created_at.split('T')[0],
+                  latestProject: obj.repo.name,
+                  prs: 1
+                };
           }
         });
       }
+
+      let data = [];
+      for (let username in prsPerUser) {
+        if (!prsPerUser.hasOwnProperty(username)) continue; // skip prototype properties
+
+        data.push({
+          name: username,
+          prs: prsPerUser[username].prs,
+          latestPr: prsPerUser[username].latestPr,
+          latestProject: prsPerUser[username].latestProject
+        });
+      }
+
+      dataDB.child('data').set(data);
+
       res.send(data);
     } else {
       res.json({
@@ -122,6 +150,7 @@ router.get('/data', async (req, res, next) => {
 function getRouter(adminRef, octokitRef) {
   firebase = adminRef;
   usersDB = firebase.ref('users');
+  dataDB = firebase.ref('/');
   octokit = octokitRef;
 
   return router;
