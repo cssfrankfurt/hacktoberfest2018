@@ -9,9 +9,10 @@ const logger = require('morgan');
 const initConfigs = require('./util/config');
 initConfigs(admin);
 
-const router = require('./routes/api')(admin.database(), octokit);
 
 const app = express();
+
+const router = require('./routes/api')(admin.database(), octokit, app);
 
 app.use(logger('dev'));
 app.use(express.json());

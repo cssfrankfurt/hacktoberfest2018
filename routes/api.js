@@ -15,6 +15,8 @@ const rootURL =
     : 'https://hacktoberfest-frankfurt.herokuapp.com';
 const callbackUrl = rootURL + '/api/callback';
 
+let app = null;
+
 let octokit = null;
 let firebase = null;
 let database = null;
@@ -131,6 +133,9 @@ router.get('/data', async (req, res, next) => {
         database.child('data').set(data);
         database.child('lastfetched').set(new Date().toISOString());
 
+        let io = app.get('io');
+        io.emit('database update', data);
+
         res.send(data);
       } else {
         res.json({
@@ -159,10 +164,12 @@ router.get('/data', async (req, res, next) => {
     },
     errData
   );
+
   await usersDB.on('value', gotAll, errData);
 });
 
-function getRouter(adminRef, octokitRef) {
+function getRouter(adminRef, octokitRef, appRef) {
+  app = appRef;
   firebase = adminRef;
   usersDB = firebase.ref('users');
   lastFetchedDB = firebase.ref('lastfetched');
