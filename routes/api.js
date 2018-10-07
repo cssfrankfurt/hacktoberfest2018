@@ -19,7 +19,9 @@ let octokit = null;
 let firebase = null;
 let usersDB = null;
 let dataDB = null;
+let lastFetchedDB = null;
 
+let lastfetched = new Date();
 /**
  * GET Login
  */
@@ -125,6 +127,7 @@ router.get('/data', async (req, res, next) => {
       }
 
       dataDB.child('data').set(data);
+      dataDB.child('lastfetched').set(new Date().toISOString());
 
       res.send(data);
     } else {
@@ -144,12 +147,18 @@ router.get('/data', async (req, res, next) => {
     });
   };
 
-  await usersDB.on('value', gotAll, errData);
+  await lastFetchedDB.on('value', (data) => {
+    lastfetched = new Date(data.val());
+    if (Math.floor(((new Date() - lastfetched)/1000)/60) > 5) {
+      await usersDB.on('value', gotAll, errData);
+    }
+  }, errData);
 });
 
 function getRouter(adminRef, octokitRef) {
   firebase = adminRef;
   usersDB = firebase.ref('users');
+  lastFetchedDB = firebase.ref('lastfetched');
   dataDB = firebase.ref('/');
   octokit = octokitRef;
 
