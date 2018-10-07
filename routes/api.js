@@ -66,6 +66,52 @@ router.get('/callback', async (req, res, next) => {
   res.redirect(rootURL);
 });
 
+/**
+ * GET users + PR data
+ */
+router.get('/data', async (req, res, next) => {
+  const gotAll = async data => {
+    let users = await data.val();
+    users = Object.values(users);
+
+    if (users) {
+      for (let i = 0; i < users.length; i++) {
+        octokit.authenticate({
+          type: 'oauth',
+          token: [users[i].accessToken]
+        });
+        const result = await octokit.activity.getEventsForUser({
+          username: [users[i].login],
+          per_page: 100
+        });
+        let filteredData = result.data.filter(
+          obj =>
+            obj.type === 'PullRequestEvent' &&
+            obj.payload.action === 'opened' &&
+            obj.payload.created_at
+        );
+        res.send(filteredData);
+      }
+    } else {
+      res.json({
+        status: 500,
+        err: 'Error while getting users'
+      });
+    }
+  };
+
+  const errData = error => {
+    debug('Something went wrong.');
+    debug(error);
+    res.json({
+      status: 500,
+      err: 'Error while getting user data'
+    });
+  };
+
+  await usersDB.on('value', gotAll, errData);
+});
+
 function getRouter(adminRef, octokitRef) {
   firebase = adminRef;
   usersDB = firebase.ref('users');
