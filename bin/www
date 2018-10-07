@@ -9,14 +9,19 @@ var port = normalizePort(process.env.PORT || '5000');
 app.set('port', port);
 
 var server = http.createServer(app);
-var io = require('socket.io')(http);
 
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+var io = require('socket.io').listen(server);
+
+app.set('io', io);
 
 io.on('connection', function (socket) {
   debug('Client connected');
+  socket.on('disconnect', function () {
+    debug('Client disconnected');
+  });
 });
 
 function normalizePort (val) {
