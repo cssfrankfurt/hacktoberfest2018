@@ -10,7 +10,9 @@ const secret = process.env.GITHUB_SECRET;
 const env = process.env.NODE_ENV || 'dev';
 const rootURL =
   // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
-  env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfest-frankfurt.herokuapp.com';
+  env === 'dev'
+    ? 'http://localhost:5000'
+    : 'https://hacktoberfest-frankfurt.herokuapp.com';
 const callbackUrl = rootURL + '/api/callback';
 
 let octokit = null;
@@ -95,17 +97,15 @@ router.get('/data', async (req, res, next) => {
               new Date('2018-10-01')
           ) {
             prsPerUser[users[i].login] = prsPerUser[users[i].login]
-              ? 
-              {
-                ...prsPerUser[users[i].login],
-                prs: prsPerUser[users[i].login].prs + 1
-              }
-              :
-              {
-                latestPr: obj.payload.pull_request.created_at.split('T')[0],
-                latestProject: obj.repo.name,
-                prs: 1
-              };
+              ? {
+                  ...prsPerUser[users[i].login],
+                  prs: prsPerUser[users[i].login].prs + 1
+                }
+              : {
+                  latestPr: obj.payload.pull_request.created_at.split('T')[0],
+                  latestProject: obj.repo.name,
+                  prs: 1
+                };
           }
         });
       }
@@ -119,7 +119,7 @@ router.get('/data', async (req, res, next) => {
           prs: prsPerUser[username].prs,
           latestPr: prsPerUser[username].latestPr,
           latestProject: prsPerUser[username].latestProject
-        })
+        });
       }
 
       dataDB.child('data').set(data);
