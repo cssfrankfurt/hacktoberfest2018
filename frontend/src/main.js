@@ -1,4 +1,6 @@
+import "@babel/polyfill";
 import Vue from "vue";
+import "./plugins/vuetify";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -17,6 +19,15 @@ const socket = io(rootURL);
 
 socket.on("database update", function(data) {
   console.log(data);
+import VueMq from "vue-mq";
+
+Vue.config.productionTip = false;
+
+Vue.use(VueMq, {
+  breakpoints: {
+    xs: 700,
+    lg: Infinity
+  }
 });
 
 new Vue({

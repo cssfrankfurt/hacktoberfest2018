@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "hacktoberfest",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,17 +9,25 @@
   },
   "dependencies": {
     "socket.io-client": "^2.1.1",
+    "@babel/polyfill": "^7.0.0-rc.1",
     "vue": "^2.5.17",
+    "vue-mq": "^0.2.1",
     "vue-router": "^3.0.1",
+    "vuetify": "^1.2.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "@vue/cli-plugin-babel": "^3.0.4",
     "@vue/cli-plugin-eslint": "^3.0.4",
     "@vue/cli-service": "^3.0.4",
     "@vue/eslint-config-prettier": "^3.0.4",
+    "babel-plugin-transform-imports": "^1.5.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "vue-cli-plugin-vuetify": "^0.2.1",
     "vue-template-compiler": "^2.5.17"
   },
   "eslintConfig": {
@@ -31,9 +39,26 @@
       "plugin:vue/essential",
       "@vue/prettier"
     ],
-    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "rules": {
+      "vue/attribute-hyphenation": "error",
+      "vue/html-end-tags": "error",
+      "vue/html-indent": "error",
+      "vue/html-self-closing": "error",
+      "vue/max-attributes-per-line": "error",
+      "vue/mustache-interpolation-spacing": "error",
+      "vue/name-property-casing": "error",
+      "vue/no-multi-spaces": "error",
+      "vue/require-default-prop": "error",
+      "vue/require-prop-types": "error",
+      "vue/v-bind-style": "error",
+      "vue/v-on-style": "error",
+      "vue/attributes-order": "error",
+      "vue/html-quotes": "error",
+      "vue/no-confusing-v-for-v-if": "error",
+      "vue/order-in-components": "error"
     }
   },
   "postcss": {
@@ -44,6 +69,6 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
+    "not ie <= 10"
   ]
 }
