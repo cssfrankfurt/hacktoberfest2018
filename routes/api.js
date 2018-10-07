@@ -17,9 +17,13 @@ const callbackUrl = rootURL + '/api/callback';
 
 let octokit = null;
 let firebase = null;
+let database = null;
+
 let usersDB = null;
 let dataDB = null;
+let lastFetchedDB = null;
 
+let lastfetched = new Date();
 /**
  * GET Login
  */
@@ -77,61 +81,65 @@ router.get('/data', async (req, res, next) => {
   const gotAll = async data => {
     let users = await data.val();
     users = Object.values(users);
-
-    if (users) {
-      let prsPerUser = {};
-      for (let i = 0; i < users.length; i++) {
-        if (users[i].accessToken) {
-          octokit.authenticate({
-            type: 'oauth',
-            token: [users[i].accessToken]
+    if (Math.floor((new Date() - lastfetched) / 1000 / 60) > 5) {
+      if (users) {
+        let prsPerUser = {};
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].accessToken) {
+            octokit.authenticate({
+              type: 'oauth',
+              token: [users[i].accessToken]
+            });
+          }
+          const result = await octokit.activity.getEventsForUser({
+            username: [users[i].login],
+            per_page: 100
+          });
+          result.data.forEach(obj => {
+            if (
+              obj.type === 'PullRequestEvent' &&
+              obj.payload.action === 'opened' &&
+              new Date(obj.payload.pull_request.created_at.split('T')[0]) >
+                new Date('2018-10-01')
+            ) {
+              prsPerUser[users[i].login] = prsPerUser[users[i].login]
+                ? {
+                    ...prsPerUser[users[i].login],
+                    prs: prsPerUser[users[i].login].prs + 1
+                  }
+                : {
+                    latestPr: obj.payload.pull_request.created_at.split('T')[0],
+                    latestProject: obj.repo.name,
+                    prs: 1
+                  };
+            }
           });
         }
-        const result = await octokit.activity.getEventsForUser({
-          username: [users[i].login],
-          per_page: 100
-        });
-        result.data.forEach(obj => {
-          if (
-            obj.type === 'PullRequestEvent' &&
-            obj.payload.action === 'opened' &&
-            new Date(obj.payload.pull_request.created_at.split('T')[0]) >
-              new Date('2018-10-01')
-          ) {
-            prsPerUser[users[i].login] = prsPerUser[users[i].login]
-              ? {
-                  ...prsPerUser[users[i].login],
-                  prs: prsPerUser[users[i].login].prs + 1
-                }
-              : {
-                  latestPr: obj.payload.pull_request.created_at.split('T')[0],
-                  latestProject: obj.repo.name,
-                  prs: 1
-                };
-          }
-        });
-      }
 
-      let data = [];
-      for (let username in prsPerUser) {
-        if (!prsPerUser.hasOwnProperty(username)) continue; // skip prototype properties
+        let data = [];
+        for (let username in prsPerUser) {
+          if (!prsPerUser.hasOwnProperty(username)) continue; // skip prototype properties
 
-        data.push({
-          name: username,
-          prs: prsPerUser[username].prs,
-          latestPr: prsPerUser[username].latestPr,
-          latestProject: prsPerUser[username].latestProject
+          data.push({
+            name: username,
+            prs: prsPerUser[username].prs,
+            latestPr: prsPerUser[username].latestPr,
+            latestProject: prsPerUser[username].latestProject
+          });
+        }
+
+        database.child('data').set(data);
+        database.child('lastfetched').set(new Date().toISOString());
+
+        res.send(data);
+      } else {
+        res.json({
+          status: 500,
+          err: 'Error while getting users'
         });
       }
-
-      dataDB.child('data').set(data);
-
-      res.send(data);
     } else {
-      res.json({
-        status: 500,
-        err: 'Error while getting users'
-      });
+      await dataDB.on('value', data => res.send(data.val()));
     }
   };
 
@@ -144,13 +152,22 @@ router.get('/data', async (req, res, next) => {
     });
   };
 
+  await lastFetchedDB.on(
+    'value',
+    async data => {
+      lastfetched = new Date(data.val());
+    },
+    errData
+  );
   await usersDB.on('value', gotAll, errData);
 });
 
 function getRouter(adminRef, octokitRef) {
   firebase = adminRef;
   usersDB = firebase.ref('users');
-  dataDB = firebase.ref('/');
+  lastFetchedDB = firebase.ref('lastfetched');
+  dataDB = firebase.ref('data');
+  database = firebase.ref('/');
   octokit = octokitRef;
 
   return router;
