@@ -5,7 +5,9 @@
   "scripts": {
     "start": "DEBUG=hacktoberfest2018:* nodemon ./bin/www",
     "format": "prettier-eslint --write \"**/*.js\"",
-    "lint": "prettier-eslint -l error --list-different \"**/*.js\""
+    "lint": "prettier-eslint -l error --list-different \"**/*.js\"",
+    "heroku-postbuild": "cd client && yarn install --network-timeout 1000000 && yarn build",
+    "heroku-prebuild": "yarn config delete proxy && npm config rm https-proxy && npm config rm proxy && yarn install --production=false --network-timeout 1000000"
   },
   "husky": {
     "hooks": {
