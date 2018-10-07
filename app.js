@@ -8,7 +8,6 @@ const logger = require('morgan');
 
 const initConfigs = require('./util/config');
 initConfigs(admin);
-const database = admin.database();
 
 const router = require('./routes/api')(admin.database(), octokit);
 
@@ -18,7 +17,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
 app.use('/api', router);
 
