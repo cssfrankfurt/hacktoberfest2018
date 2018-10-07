@@ -46,33 +46,51 @@ router.get('/callback', async (req, res, next) => {
 
   let accessToken = null;
   debug("[AUTH] Getting user's access token");
-
+  
   await axios
-    .post('https://github.com/login/oauth/access_token', {
-      client_id: key,
-      client_secret: secret,
-      code: code
-    })
-    .then(response => {
-      accessToken = response.data.split('&')[0].split('token=')[1];
-      octokit.authenticate({
-        type: 'oauth',
-        token: accessToken
-      });
+  .post('https://github.com/login/oauth/access_token', {
+    client_id: key,
+    client_secret: secret,
+    code: code
+  })
+  .then(response => {
+    accessToken = response.data.split('&')[0].split('token=')[1];
+    octokit.authenticate({
+      type: 'oauth',
+      token: accessToken
     });
-
+  });
+  
   debug("[AUTH] Got user's access token");
-
+  
   const userData = await octokit.users.get({});
   const login = userData.data.login;
-
-  const newDBUser = {
-    login,
-    accessToken
-  };
-  let userEntry = usersDB.push(newDBUser, afterPush);
-  debug('Firebase generated key: ' + userEntry.key);
-
+  
+  await usersDB.on(
+    'value',
+    data => {
+      let users = data.val();
+      if(Object.values(users).some(u => u.login === login)) {
+        debug('User already in database');
+      } else {
+        let newDBUser = {
+          login,
+          accessToken
+        };
+        let userEntry = usersDB.push(newDBUser, afterPush);
+        debug('Firebase generated key: ' + userEntry.key);
+      }
+    },
+    error => {
+      debug('Something went wrong.');
+      debug(error);
+      res.json({
+        status: 500,
+        err: 'Error while getting user data'
+      });
+    }
+  );
+  
   res.redirect(rootURL);
 });
 
