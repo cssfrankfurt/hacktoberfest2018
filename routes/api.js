@@ -75,6 +75,7 @@ router.get('/data', async (req, res, next) => {
     users = Object.values(users);
 
     if (users) {
+      let data = {};
       for (let i = 0; i < users.length; i++) {
         octokit.authenticate({
           type: 'oauth',
@@ -84,14 +85,18 @@ router.get('/data', async (req, res, next) => {
           username: [users[i].login],
           per_page: 100
         });
-        let filteredData = result.data.filter(
-          obj =>
+        result.data.forEach(obj => {
+          if (
             obj.type === 'PullRequestEvent' &&
             obj.payload.action === 'opened' &&
-            obj.payload.created_at
-        );
-        res.send(filteredData);
+            new Date(obj.payload.pull_request.created_at.split('T').shift()) >
+              new Date('2018-10-01')
+          ) {
+            data[users[i].login] = data[users[i].login] ? data[users[i].login] + 1 : 1;
+          }
+        });
       }
+      res.send(data);
     } else {
       res.json({
         status: 500,
