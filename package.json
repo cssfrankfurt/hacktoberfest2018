@@ -14,6 +14,10 @@
       "pre-push": "yarn lint"
     }
   },
+  "engines": {
+    "node": "8.11.4",
+    "yarn": "1.9.4"
+  },
   "dependencies": {
     "@octokit/rest": "^15.13.0",
     "axios": "^0.18.0",
