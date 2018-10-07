@@ -92,7 +92,9 @@ router.get('/data', async (req, res, next) => {
             new Date(obj.payload.pull_request.created_at.split('T').shift()) >
               new Date('2018-10-01')
           ) {
-            data[users[i].login] = data[users[i].login] ? data[users[i].login] + 1 : 1;
+            data[users[i].login] = data[users[i].login]
+              ? data[users[i].login] + 1
+              : 1;
           }
         });
       }
