@@ -41,7 +41,6 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
-    isLoading: false,
     pagination: {
       sortBy: "prs",
       descending: true,
@@ -71,7 +70,8 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      users: "api/users"
+      users: "api/users",
+      isLoading: "loader/isLoading"
     }),
     totalPrs() {
       return this.users.reduce((total, obj) => obj.prs + total, 0);
