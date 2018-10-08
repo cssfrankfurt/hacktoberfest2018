@@ -8,8 +8,9 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "socket.io-client": "^2.1.1",
     "@babel/polyfill": "^7.0.0-rc.1",
+    "axios": "^0.18.0",
+    "socket.io-client": "^2.1.1",
     "vue": "^2.5.17",
     "vue-mq": "^0.2.1",
     "vue-router": "^3.0.1",
