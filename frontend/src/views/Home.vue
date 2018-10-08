@@ -18,8 +18,6 @@
   </div>
 </template>
 
-/* TODO: 1.  */
-
 <script>
 import { mapActions } from "vuex";
 export default {
