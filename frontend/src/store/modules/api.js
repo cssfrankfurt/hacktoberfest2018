@@ -11,7 +11,7 @@ const getters = {
 };
 
 const mutations = {
-  RECIEVE_USERS(state, { data }) {
+  RECEIVE_USERS(state, { data }) {
     state.users = data;
   }
 };
@@ -20,13 +20,13 @@ const actions = {
   async FETCH_USERS({ commit }) {
     try {
       const response = await axios.get("/api/data");
-      commit("RECIEVE_USERS", { data: response.data });
+      commit("RECEIVE_USERS", { data: response.data });
     } catch (error) {
       console.error(error); // eslint-disable-line no-console
     }
   },
   UPDATE_USERS({ commit }, updatedData) {
-    commit("RECIEVE_USERS", { data: updatedData });
+    commit("RECEIVE_USERS", { data: updatedData });
   }
 };
 
