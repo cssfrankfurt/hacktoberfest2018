@@ -120,7 +120,7 @@ router.get('/data', async (req, res, next) => {
             if (
               obj.type === 'PullRequestEvent' &&
               obj.payload.action === 'opened' &&
-              new Date(obj.payload.pull_request.created_at.split('T')[0]) >
+              new Date(obj.payload.pull_request.created_at) >
                 new Date(lastfetched)
             ) {
               prsPerUser[users[i].login] = prsPerUser[users[i].login]
