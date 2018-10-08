@@ -5,7 +5,7 @@ import VueMq from "vue-mq";
 import "./plugins/vuetify";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import store from "./store/store";
 
 const env = process.env.NODE_ENV || "dev";
 const rootURL =
@@ -19,6 +19,7 @@ Vue.config.productionTip = false;
 const socket = io(rootURL);
 
 socket.on("database update", function(data) {
+  // eslint-disable-next-line
   console.log(data);
 });
 
