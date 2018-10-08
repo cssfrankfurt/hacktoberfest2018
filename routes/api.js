@@ -101,6 +101,7 @@ router.get('/data', async (req, res, next) => {
   const gotAll = async data => {
     let users = await data.val();
     users = Object.values(users);
+
     if (Math.floor((new Date() - lastfetched) / 1000 / 60) > 5) {
       if (users) {
         let prsPerUser = {};
@@ -120,7 +121,7 @@ router.get('/data', async (req, res, next) => {
               obj.type === 'PullRequestEvent' &&
               obj.payload.action === 'opened' &&
               new Date(obj.payload.pull_request.created_at.split('T')[0]) >
-                new Date('2018-10-01')
+                new Date(lastfetched)
             ) {
               prsPerUser[users[i].login] = prsPerUser[users[i].login]
                 ? {
@@ -162,7 +163,7 @@ router.get('/data', async (req, res, next) => {
         });
       }
     } else {
-      await dataDB.on('value', data => res.send(data.val()));
+      await dataDB.on('value', async data => res.send(data.val()));
     }
   };
 
