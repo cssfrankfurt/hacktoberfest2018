@@ -5,17 +5,7 @@ import login from "./modules/login";
 
 Vue.use(Vuex);
 
-/* ----------  Global Scope  ---------- */
-const state = {};
-const getters = {};
-const actions = {};
-const mutations = {};
-
 export default new Vuex.Store({
-  state,
-  actions,
-  mutations,
-  getters,
   modules: {
     api,
     login
