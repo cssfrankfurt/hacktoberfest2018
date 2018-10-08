@@ -14,7 +14,7 @@ const env = process.env.NODE_ENV || "dev";
 
 Vue.config.productionTip = false;
 
-const socket = io("https://hacktoberfest-frankfurt.herokuapp.com");
+const socket = io("https://hacktoberfestffm.de");
 
 socket.on("database update", function(data) {
   store.dispatch("api/UPDATE_USERS", data);
