@@ -134,7 +134,7 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="sass">
   .leaderboard
     max-width: 1280px
     margin: 0 auto
@@ -149,12 +149,12 @@ export default {
     font-size: 18px
 
   table.v-table tbody td.progress--complete
-    color: #4CAF50
+    color: $color-success
     font-weight: bold
 
   .fa-sort-up
     margin-left: 5px
-  
+
   .total
     text-align: right
     font-size: 1.5rem

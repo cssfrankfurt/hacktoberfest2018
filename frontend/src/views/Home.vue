@@ -16,7 +16,7 @@
   </div>
 </template>
 
-<style lang="stylus">
+<style lang="sass">
   .hacktoberfest
     max-width: 600px
     padding: 1rem

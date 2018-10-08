@@ -1,16 +1,17 @@
 <template>
   <div class="nav-wrapper primary">
-      <nav class="nav">
-        <router-link 
-          v-for="route in $router.options.routes"
-          :class="{activeRoute: $route.name === route.name}" 
-          class="routerlink white--text" 
-          :to="route.path">{{route.name}}</router-link>
-      </nav>
-    </div>
+    <nav class="nav">
+      <router-link 
+        v-for="route in $router.options.routes"
+        :key="route.index"
+        :class="{activeRoute: $route.name === route.name}" 
+        :to="route.path" 
+        class="routerlink white--text">{{ route.name }}</router-link>
+    </nav>
+  </div>
 </template>
 
-<style lang="stylus">
+<style lang="sass">
   .nav-wrapper
     position: sticky
     top: 0
@@ -35,7 +36,7 @@
         margin: 0
 
   .activeRoute
-    border-bottom: 2px solid #FF9A56
+    border-bottom: 2px solid $color-secondary
 
   .routerlink, .v-btn
     letter-spacing: 1px
@@ -45,7 +46,7 @@
     font-size: 1rem
 
   .routerlink:focus, .v-btn:focus
-    outline: 2px dotted #01FFFF
+    outline: 2px dotted $color-accent
     outline-offset: 5px
 
 </style>

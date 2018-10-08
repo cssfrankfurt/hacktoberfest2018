@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import TheNavigation from './components/TheNavigation.vue'
+import TheNavigation from "./components/TheNavigation.vue";
 export default {
   name: "App",
   components: {
@@ -17,17 +17,17 @@ export default {
 };
 </script>
 
-<style lang="stylus">
+<style lang="sass">
   body, html
     position: relative
     font-size: 18px
-    background: #582D41
+    background: $color-primary
     padding: 0 .3em
     @media screen and (max-width: 420px)
       font-size: 16px
 
   #app
-    background: #582D41
+    background: $color-primary
     padding-bottom: 2em
 
   *
