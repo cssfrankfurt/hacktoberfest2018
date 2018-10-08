@@ -25,7 +25,7 @@
         <!-- GITHUB USERNAME -->
         <td>{{ props.item.name }}</td>
         <!-- PROJECT LAST CONTRIBUTED TO -->
-        <td v-if="$mq !== 'xs'">{{ props.item.latest }}</td>
+        <td v-if="$mq !== 'xs'">{{ props.item.latestProject }}</td>
         <!-- STATUS: COMPLETE/IN PROGRESS -->
         <td :class="{'progress--complete': props.item.prs >= 5}">
           <template v-if="props.item.prs >= 5" >Completed!</template>
@@ -70,56 +70,8 @@ export default {
       {
         name: "vicbergquist",
         prs: 5,
-        joined: "01.10.18",
-        latest: "vue-cli-locales"
-      },
-      {
-        name: "flxwu",
-        prs: 8,
-        joined: "01.10.18",
-        latest: "cssfrankfurt/hacktoberfest2018"
-      },
-      {
-        name: "bob",
-        prs: 2,
-        joined: "07.10.18",
-        latest: "cssfrankfurt/cssfrankfurt.de"
-      },
-      {
-        name: "barbara",
-        prs: 1,
-        joined: "12.10.18",
-        latest: "cssfrankfurt/cssfrankfurt.de"
-      },
-      {
-        name: "torstenhula",
-        prs: 10,
-        joined: "02.10.18",
-        latest: "repo/repo"
-      },
-      {
-        name: "larsYEAH",
-        prs: 6,
-        joined: "02.10.18",
-        latest: "repo/repo"
-      },
-      {
-        name: "hola92",
-        prs: 4,
-        joined: "02.10.18",
-        latest: "repo/repo"
-      },
-      {
-        name: "derek123",
-        prs: 10,
-        joined: "02.10.18",
-        latest: "repo/repo"
-      },
-      {
-        name: "jamestiger",
-        prs: 20,
-        joined: "02.10.18",
-        latest: "repo/repo"
+        latestPr: "2018-10-08",
+        latestProject: "vue-cli-locales"
       }
     ]
   }),
