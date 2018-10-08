@@ -8,19 +8,16 @@ import router from "./router";
 import store from "./store/store";
 
 const env = process.env.NODE_ENV || "dev";
-const rootURL =
-  // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
-  env === "dev"
+/* const rootURL = // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de' env === "dev"
     ? "http://localhost:5000"
-    : "https://hacktoberfest-frankfurt.herokuapp.com";
+    : "https://hacktoberfest-frankfurt.herokuapp.com"; */
 
 Vue.config.productionTip = false;
 
-const socket = io(rootURL);
+const socket = io("https://hacktoberfest-frankfurt.herokuapp.com");
 
 socket.on("database update", function(data) {
-  // eslint-disable-next-line
-  console.log(data);
+  store.dispatch("api/UPDATE_USERS", data);
 });
 
 Vue.use(VueMq, {

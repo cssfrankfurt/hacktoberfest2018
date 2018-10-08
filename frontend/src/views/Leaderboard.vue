@@ -2,8 +2,9 @@
   <div class="leaderboard white--text">
     <!-- Change name to progress board? -->
     <h1>Live Leaderboard</h1>
-    <!-- TODO: Fix link -->
-    <p>Check out our leaderboard to see how our community is doing. Can't see your progress? Add yourself <span class="font-weight-bold">here</span>!</p>
+    <p>Check out our leaderboard to see how our community is doing. Can't see your progress? Add yourself <button 
+      class="font-weight-bold" 
+      @click="login">here</button>!</p>
     <v-data-table 
       id="leaderboard-table"
       :headers="headers" 
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
     isLoading: false,
@@ -65,23 +67,27 @@ export default {
         value: "status",
         sortable: false
       }
-    ],
-    users: [
-      {
-        name: "vicbergquist",
-        prs: 5,
-        latestPr: "2018-10-08",
-        latestProject: "vue-cli-locales"
-      }
     ]
   }),
   computed: {
+    ...mapGetters({
+      users: "api/users"
+    }),
     totalPrs() {
       return this.users.reduce((total, obj) => obj.prs + total, 0);
     },
     totalUsers() {
       return this.users.length;
     }
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    ...mapActions({
+      login: "login/login",
+      fetchData: "api/FETCH_USERS"
+    })
   }
 };
 </script>

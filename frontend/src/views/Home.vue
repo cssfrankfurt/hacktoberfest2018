@@ -11,10 +11,26 @@
       <p>Join our live <router-link 
         class="white--text" 
         to="/leaderboard">leaderboard</router-link> to track your progress and see how our community is doing.</p>
-      <v-btn class="accent white--text">Join us</v-btn> or find out more here.
+      <v-btn 
+        class="accent white--text" 
+        @click="login">Join us</v-btn> or find out more here.
     </div>
   </div>
 </template>
+
+/* TODO: 1.  */
+
+<script>
+import { mapActions } from "vuex";
+export default {
+  name: "Home",
+  methods: {
+    ...mapActions({
+      login: "login/login"
+    })
+  }
+};
+</script>
 
 <style lang="sass">
   .hacktoberfest
