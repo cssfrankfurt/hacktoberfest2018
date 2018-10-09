@@ -24,13 +24,35 @@
         <!-- TOTAL PRS -->
         <td>{{ props.item.prs }}</td>
         <!-- GITHUB USERNAME -->
-        <td>{{ props.item.name }}</td>
+        <td>
+          <a 
+            :href="'https://github.com/' + props.item.name" 
+            rel="noopener noreferrer" 
+            target="_blank" 
+            class="link-external text--black">{{ props.item.name }} 
+            <!-- LINK ICON -->
+            <v-icon 
+              small 
+              class="icon icon-link" 
+              v-text="'fas fa-link'"></v-icon></a></td>
         <!-- PROJECT LAST CONTRIBUTED TO -->
-        <td v-if="$mq !== 'xs'">{{ props.item.latestProject }}</td>
+        <td v-if="$mq !== 'xs'">
+          <a 
+            class="link-external text--black" 
+            :href="'https://github.com/' + props.item.latestProject" 
+            rel="noopener noreferrer" 
+            target="_blank">{{ props.item.latestProject }} 
+            <!-- LINK ICON -->
+            <v-icon 
+              small 
+              class="icon icon-link" 
+              v-text="'fas fa-link'"></v-icon></a></td>
         <!-- STATUS: COMPLETE/IN PROGRESS -->
         <td :class="{'progress--complete': props.item.prs >= 5}">
+          <!-- IF MORE THAN 5 PRS -->
           <template v-if="props.item.prs >= 5" >Completed!</template>
-        <template v-else>In progress...</template></td>
+          <!-- IF LESS THAN 5 PRS -->
+          <template v-else>In progress...</template></td>
       </template>
     </v-data-table>
     <div class="total white--text">{{ totalPrs }} PRs by {{ totalUsers }} users!</div>
@@ -53,7 +75,7 @@ export default {
         value: "prs"
       },
       {
-        text: "User",
+        text: "Name (GitHub)",
         value: "name"
       },
       {
@@ -93,9 +115,14 @@ export default {
 </script>
 
 <style lang="sass">
+
   .leaderboard
     max-width: 1280px
     margin: 0 auto
+
+  .link-external
+    color: black
+    text-decoration: none
 
   table.v-table thead tr
     height: 40px
@@ -113,18 +140,29 @@ export default {
   .fa-sort-up
     margin-left: 5px
 
+  i.v-icon.icon.icon-link
+    color: $color-accent
+    margin-bottom: 3px
+    opacity: 0
+
+  .link-external:hover > i.v-icon.icon.icon-link
+    opacity: 1
+
   .total
     text-align: right
     font-size: 1.5rem
     font-weight: 700
     padding-top: .5rem
 
+  .theme--light.v-table tbody tr:hover:not(.v-datatable__expand-row)
+    background: white
+
   @media screen and (max-width: 700px)
     .v-datatable > thead:nth-child(1) > tr:nth-child(1) th.column:nth-child(3)
       display: none
 
     #leaderboard-table table.v-table thead th
-      padding: 0 
+      padding: 0
       padding-left: 1em
 
     #leaderboard-table .v-datatable > tbody > tr > td
