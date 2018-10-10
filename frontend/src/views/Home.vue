@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ListComponent from "@/components/ListComponent"
+import ListComponent from "@/components/ListComponent";
 import { mapActions } from "vuex";
 export default {
   name: "Home",
