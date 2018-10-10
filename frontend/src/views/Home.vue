@@ -26,7 +26,11 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import ListComponent from "@/components/ListComponent";
+=======
+import ListComponent from "@/components/ListComponent"
+>>>>>>> landing page
 import { mapActions } from "vuex";
 export default {
   name: "Home",
