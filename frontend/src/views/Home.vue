@@ -6,8 +6,7 @@
         src="/hacktoberfest.svg" 
         alt="Hacktoberfest Frankfurt">
     </div>
-    <div class="stats">
-      <ul class="list list-stats">
+    <ul class="list list-stats">
         <li 
           class="list-item"
           v-for="stat in stats" 
@@ -16,7 +15,6 @@
           <div class="stat-name">{{stat.name}}</div>
         </li>
       </ul>
-    </div>
     <article class="article article-community">
       <list-component class="community-list" :items="communities" :itemType="'community'"/>
       <h2 class="sponsor-heading">Sponsored by</h2>
@@ -161,22 +159,23 @@ export default {
     min-height: 100vh
 
   .main-img
-    max-width: 600px
+    max-width: 500px
     text-align: center
-    margin: 1rem auto
+    margin: auto
 
   .hacktoberfest-img
     width: 100%
 
-  .stats
+  .list-stats
     flex-basis: 100%
     text-align: center
     padding-bottom: .5rem
-
-  .list.list-stats
     max-width: 700px
-    margin: auto
-    justify-content: space-between
+    margin: 0 auto
+    justify-content: center
+
+    .list-item
+      margin: 0 1.5rem
 
   .stat-number
     font-size: 2.5rem
@@ -185,7 +184,7 @@ export default {
   .stat-name, .sponsor-heading
     text-align: center
     text-transform: uppercase
-    font-size: 1rem
+    font-size: .9rem
     font-weight: 700
     letter-spacing: 1px
     opacity: .7

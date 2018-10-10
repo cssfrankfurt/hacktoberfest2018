@@ -1,13 +1,13 @@
 <template>
   <footer class="footer">
-    <div class="footer-wrapper"></div>
+    <div class="footer-wrapper"/>
   </footer>
 </template>
 
 <script>
-  export default {
-    name: "Footer"
-  }
+export default {
+  name: "Footer"
+};
 </script>
 
 <style lang="sass">

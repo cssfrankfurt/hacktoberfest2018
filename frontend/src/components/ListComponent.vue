@@ -55,6 +55,10 @@
   .sponsor-list
     margin: auto
     justify-content: center
+    padding-bottom: 3rem
+
+  .list-item
+    text-align: center
 
   .item-link
     text-decoration: none
