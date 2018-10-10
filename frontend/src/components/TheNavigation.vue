@@ -1,25 +1,33 @@
 <template>
+<nav class="nav">
+  <router-link to="/">
+    <img class="nav-logo" src="/hacktoberfest_small.svg" alt="Hacktoberfest">
+  </router-link>
   <div class="nav-wrapper primary">
-    <nav class="nav">
       <router-link 
         v-for="route in $router.options.routes"
         :key="route.index"
         :class="{activeRoute: $route.name === route.name}" 
         :to="route.path" 
-        class="routerlink white--text">{{ route.name }}</router-link>
-    </nav>
+        class="router-link">{{ route.name }}</router-link>
   </div>
+  </nav>
 </template>
 
 <style lang="sass">
-  .nav-wrapper
+  .nav
     position: sticky
     top: 0
     z-index: 999
     display: flex
     justify-content: flex-end
+    align-items: center
+    padding: 0 1rem
+    background: $color-primary
+    @media screen and (max-width: 320px)
+      padding: 0
 
-  nav
+  .nav-wrapper
     display: flex
     text-align: right
     max-width: 1280px
@@ -27,26 +35,27 @@
     margin: auto
     justify-content: flex-end
     padding: .8em 0
-    @media screen and (max-width: 420px)
-      justify-content: space-between
-      flex-wrap: wrap
-    .routerlink
+
+    .router-link
+      color: white
       margin-left: 1.5em
-      @media screen and (max-width: 420px)
-        margin: 0
+      letter-spacing: 1px
+      text-transform: capitalize
+      font-weight: 500
+      text-decoration: none
+      font-size: 1rem
+      @media screen and (max-width: 320px)
+        margin-left: .5rem
 
   .activeRoute
-    border-bottom: 2px solid $color-secondary
+    border-bottom: 1px solid $color-cyan
 
-  .routerlink, .v-btn
-    letter-spacing: 1px
-    text-transform: uppercase
-    font-weight: 600
-    text-decoration: none
-    font-size: 1rem
-
-  .routerlink:focus, .v-btn:focus
+  .routerlink:focus
     outline: 2px dotted $color-accent
     outline-offset: 5px
+
+  .nav-logo
+    max-height: 2rem
+    padding: .2rem
 
 </style>
