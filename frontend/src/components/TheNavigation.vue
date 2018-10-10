@@ -1,16 +1,16 @@
 <template>
-<nav class="nav">
-  <router-link to="/">
-    <img class="nav-logo" src="/hacktoberfest_small.svg" alt="Hacktoberfest">
-  </router-link>
-  <div class="nav-wrapper primary">
+  <nav class="nav">
+    <router-link to="/">
+      <img class="nav-logo" src="/hacktoberfest_small.svg" alt="Hacktoberfest">
+    </router-link>
+    <div class="nav-wrapper primary">
       <router-link 
         v-for="route in $router.options.routes"
         :key="route.index"
         :class="{activeRoute: $route.name === route.name}" 
         :to="route.path" 
         class="router-link">{{ route.name }}</router-link>
-  </div>
+    </div>
   </nav>
 </template>
 
