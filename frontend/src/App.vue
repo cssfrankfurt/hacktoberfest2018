@@ -23,26 +23,75 @@ export default {
 <style lang="sass">
   body, html
     position: relative
-    font-size: 18px
+    font-size: 20px
+    color: white
     background: $color-primary
-    padding: 0 .3em
+    line-height: 1.3
     @media screen and (max-width: 420px)
       font-size: 16px
 
   #app
     background: $color-primary
-    padding-bottom: 2em
+    min-height: 100vh
+    @media screen and (max-width: 768px)
+      padding: 0 .5rem
+
+  .theme--light.application
+    color: white
+    font-family: 'Roboto', Helvetica, Arial, sans-serif
 
   *
     box-sizing: border-box
+    margin: 0
+    padding: 0
 
-  .page
+  section
     display: flex
-    flex-direction: row
+    flex-direction: column
     flex-wrap: wrap
-    justify-content: center
-    min-height: 90vh
+    max-width: 1300px
+    margin: auto
 
-  .content
-    max-width: 550px
+  a
+    color: white
+
+  p
+    margin-bottom: 1rem
+
+  h1, h2, h3
+    margin-bottom: .3rem
+
+  h2
+    font-size: 1.2rem
+
+  h3
+    font-size: 1rem
+    margin-top: 1.3rem
+
+  article
+    flex-basis: 50%
+    padding: 1rem 1rem
+
+  button
+    color: $color-primary
+    font-weight: 700
+    font-family: 'Roboto', Helvetica, Arial, sans-serif
+    background: $color-cyan
+    border: 0
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 1rem
+    padding: .5rem 2rem
+    border-radius: .1rem
+    box-shadow: 0 .2rem .2rem hsl(332, 32%, 23%)
+    &:active
+      transform: translate3d(.05rem, .05rem, .05rem)
+      box-shadow: 0
+
+
+  .link-internal
+    font-weight: 600
+    text-decoration: none
+    border-bottom: 2px solid $color-cyan
+
 </style>

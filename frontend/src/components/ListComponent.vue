@@ -56,6 +56,9 @@
     margin: auto
     justify-content: center
 
+  .list-item
+    text-align: center
+
   .item-link
     text-decoration: none
     font-weight: 500
