@@ -3,7 +3,14 @@
     <div class="content white--text">
       <h1 class="white--text">Resources</h1>
       <p>Find out how you can get the most out of Hacktoberfest 2018</p>
+      <h3 class="white--text">How to contribute to Open Source</h3>
+      Contributing to Open Source isn't magic. In fact, it's quite easy once you find the right project and know how to use GitHub.
+      In case you need a guide, there is an excellent one by GitHub themselves!
+      <a class="featured white--text" href="https://opensource.guide/how-to-contribute/">https://opensource.guide/how-to-contribute/</a>
+      <br/>
+      <br/>
       <h3 class="white--text">Projects to contribute to</h3>
+        If it's your first contribution, check out an awesome <a class="white--text" href="https://github.com/MunGell/awesome-for-beginners">list of beginner-friendly projects</a>!
         <blockquote>
           <p>
             In general, any GitHub issue labeled with <i>hacktoberfest</i> is intended for Hacktoberfest Contributions.
