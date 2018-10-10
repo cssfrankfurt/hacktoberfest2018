@@ -1,5 +1,5 @@
 <template>
-  <div class="leaderboard white--text">
+  <section class="section section-leaderboard white--text">
     <!-- Change name to progress board? -->
     <h1>Live Leaderboard</h1>
     <p>Check out our leaderboard to see how our community is doing. Can't see your progress? Add yourself <button 
@@ -34,29 +34,29 @@
             <v-icon 
               small 
               class="icon icon-link" 
-              v-text="'fas fa-link'"></v-icon></a></td>
+              v-text="'fas fa-link'"/></a></td>
         <!-- PROJECT LAST CONTRIBUTED TO -->
         <td v-if="$mq !== 'xs'">
           <a 
-            class="link-external text--black" 
             :href="'https://github.com/' + props.item.latestProject" 
+            class="link-external text--black" 
             rel="noopener noreferrer" 
             target="_blank">{{ props.item.latestProject }} 
             <!-- LINK ICON -->
             <v-icon 
               small 
               class="icon icon-link" 
-              v-text="'fas fa-link'"></v-icon></a></td>
+              v-text="'fas fa-link'"/></a></td>
         <!-- STATUS: COMPLETE/IN PROGRESS -->
         <td :class="{'progress--complete': props.item.prs >= 5}">
           <!-- IF MORE THAN 5 PRS -->
           <template v-if="props.item.prs >= 5" >Completed!</template>
-          <!-- IF LESS THAN 5 PRS -->
-          <template v-else>In progress...</template></td>
+        <!-- IF LESS THAN 5 PRS -->
+        <template v-else>In progress...</template></td>
       </template>
     </v-data-table>
     <div class="total white--text">{{ totalPrs }} PRs by {{ totalUsers }} users!</div>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -115,10 +115,6 @@ export default {
 </script>
 
 <style lang="sass">
-
-  .leaderboard
-    max-width: 1280px
-    margin: 0 auto
 
   .link-external
     color: black

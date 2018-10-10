@@ -50,7 +50,8 @@ export default {
     flex-direction: column
     flex-wrap: wrap
     max-width: 1300px
-    margin: auto
+    margin: 0 auto
+    min-height: 100vh
 
   a
     color: white
@@ -87,7 +88,6 @@ export default {
     &:active
       transform: translate3d(.05rem, .05rem, .05rem)
       box-shadow: 0
-
 
   .link-internal
     font-weight: 600

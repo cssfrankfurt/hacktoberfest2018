@@ -159,7 +159,7 @@ export default {
     min-height: 100vh
 
   .main-img
-    max-width: 550px
+    max-width: 500px
     text-align: center
     margin: auto
 
@@ -171,7 +171,7 @@ export default {
     text-align: center
     padding-bottom: .5rem
     max-width: 700px
-    margin: auto
+    margin: 0 auto
     justify-content: center
 
     .list-item
