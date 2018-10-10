@@ -43,6 +43,4 @@ export default {
     justify-content: center
     min-height: 90vh
 
-  .content
-    max-width: 550px
 </style>
