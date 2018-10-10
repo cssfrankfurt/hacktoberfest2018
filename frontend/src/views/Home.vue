@@ -38,7 +38,7 @@ export default {
       {
         name: "melsicon",
         url: "https://melsicon.de",
-        img: '/melsicon.svg'
+        img: './sponsors/melsicon.svg'
       },
       {
         name: "rocketloop",
