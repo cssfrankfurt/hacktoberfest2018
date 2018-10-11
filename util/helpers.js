@@ -8,8 +8,8 @@ const afterPush = err => {
   }
 };
 
-const paginate = async (method) => {
-  let response = await method({ per_page: 100 })
+const paginate = async (octokit, method, username) => {
+  let response = await method({ per_page: 100, username })
   let { data } = response
   while (octokit.hasNextPage(response)) {
     response = await octokit.getNextPage(response)
