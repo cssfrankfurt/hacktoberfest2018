@@ -16,7 +16,9 @@
       </ul>
       <div class="join-us">
         <p>Want to track your progress live at our event?</p>
-        <button @click="login" tabindex="0"> Join us </button>
+        <button 
+          tabindex="0" 
+          @click="login"> Join us </button>
       </div>
     </div>
     <v-data-table 
