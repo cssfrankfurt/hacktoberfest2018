@@ -50,7 +50,7 @@ export default {
   name: "Resources",
   data: () => ({
     projects: [
-        {
+      {
         featured: true,
         title: "Beginner Friendly Projects",
         description: "A great list of lots of beginner friendly projects!",
@@ -67,17 +67,20 @@ export default {
       {
         title: "30-seconds/30-seconds-of-code",
         description:
-          "Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less",
+          "Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less"
       },
       {
         title: "Did you know?",
-        description: "Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.",
+        description:
+          "Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.",
         featured: true,
-        url: "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
+        url:
+          "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
       },
       {
         title: "cssfrankfurt/cssfrankfurt.de",
-        description: "CSS Frankfurt is always looking for help with their website!"
+        description:
+          "CSS Frankfurt is always looking for help with their website!"
       },
       {
         title: "Did you know?",
