@@ -1,23 +1,23 @@
 <template>
   <section class="section section-leaderboard">
-  <div class="leaderboard-stats">
+    <div class="leaderboard-stats">
       <img 
         src="/hacktoberfest_title.svg" 
         alt="hacktoberfest" 
         class="leaderboard-header">
-    <ul class="list list-stats">
+      <ul class="list list-stats">
         <li 
-          class="list-item"
-          v-for="stat in stats" 
-          :key="stat.index">
-          <div class="stat-number">{{stat.number}}</div>
-          <div class="stat-name">{{stat.name}}</div>
+          v-for="stat in stats"
+          :key="stat.index" 
+          class="list-item">
+          <div class="stat-number">{{ stat.number }}</div>
+          <div class="stat-name">{{ stat.name }}</div>
         </li>
       </ul>
       <div class="join-us">
         <p>Want to track your progress live at our event?</p>
         <button @click="login" tabindex="0"> Join us </v-icon></button>
-  </div>
+      </div>
     </div>
     <v-data-table 
       id="leaderboard-table"
@@ -68,8 +68,8 @@
               small 
               class="icon icon-link" 
               v-text="'fas fa-link'"/></a>
-            <template v-else>{{props.item.latestProject}}</template>
-          </td>
+          <template v-else>{{ props.item.latestProject }}</template>
+        </td>
 
         <!-- TIMESTAMP OF LAST CONTRIBUTION -->
         <td v-if="$mq !== 'xs'">{{ props.item.latestPr }}</td>
@@ -121,29 +121,10 @@ export default {
     ]
   }),
   computed: {
-    stats(){
-      const statsArray = [
-      {
-        name: "Pull Requests",
-        number: this.totalPrs
-      },
-      {
-        name: "Participants",
-        number: this.totalParticipants
-      },
-      {
-        name: "Completions",
-        number: this.totalCompletions
-      }
-    ]
-    return statsArray
-    },
     ...mapGetters({
       users: "api/users",
       isLoading: "loader/isLoading",
-      totalPrs: "api/totalPrs",
-      totalParticipants: "api/totalParticipants",
-      totalCompletions: "api/totalCompletions"
+      stats: "api/stats"
     })
   },
   created() {
@@ -166,23 +147,19 @@ export default {
   .leaderboard-header
     max-height: 8rem
 
+  .join-us
+    padding-top: 1rem
+
   .leaderboard-stats
     padding-bottom: 1.5rem
     text-align: center
 
-  .heading
-    font-size: 1.5rem
-    letter-spacing: 1px
-    color: rgba(255,255,255,.8)
-
-  .link-external
-    color: black
-    text-decoration: none
+  #leaderboard-table
+    padding: 1rem 2rem
 
   .theme--light.v-table
     background: $color-primary
     color: white
-    overflow: scroll
 
   .theme--light.v-datatable thead th.column.sortable.active i
     color: $color-cyan

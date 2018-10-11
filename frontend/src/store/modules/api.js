@@ -2,23 +2,15 @@ import axios from "axios";
 
 const state = {
   users: [],
-  totalParticipants: 0,
-  totalPrs: 0,
-  totalCompletions: 0
+  stats: []
 };
 
 const getters = {
   users() {
     return state.users;
   },
-  totalParticipants() {
-    return state.totalParticipants;
-  },
-  totalPrs() {
-    return state.totalPrs;
-  },
-  totalCompletions() {
-    return state.totalCompletions;
+  stats() {
+    return state.stats;
   }
 };
 
@@ -26,18 +18,19 @@ const mutations = {
   RECEIVE_USERS(state, { data }) {
     state.users = data;
   },
-  GET_TOTAL_PARTICIPANTS(state, data) {
-    state.totalParticipants = data;
-  },
-  GET_TOTAL_PRS(state, data) {
-    let total = data.reduce((total, obj) => obj.prs + total, 0);
-    state.totalPrs = total;
-  },
-  GET_TOTAL_COMPLETIONS(state, data) {
-    let completions = data.reduce((total, users) => {
+  GET_STATS(state, users) {
+    // Calculate total pull requests
+    let totalPrs = users.reduce((total, obj) => obj.prs + total, 0);
+    // Calculate total completions (prs/5)
+    let totalCompletions = users.reduce((total, users) => {
       return users.prs >= 5 ? total + 1 : total;
     }, 0);
-    state.totalCompletions = completions;
+    state.stats = [];
+    state.stats.push(
+      { name: "Participants", number: users.length },
+      { name: "Pull Requests", number: totalPrs },
+      { name: "Completions", number: totalCompletions }
+    );
   }
 };
 
@@ -50,11 +43,7 @@ const actions = {
       /* ===== SET THE LOADING STATE ===== */
       commit("loader/setLoading", false, { root: true });
       /* ===== CALCULATE TOTAL PARTICIPANTS ===== */
-      commit("GET_TOTAL_PARTICIPANTS", response.data.length);
-      /* ===== CALCULATE TOTAL PULL REQUESTS ===== */
-      commit("GET_TOTAL_PRS", response.data);
-      /* ===== CALCULATE TOTAL COMPLETIONS ===== */
-      commit("GET_TOTAL_COMPLETIONS", response.data);
+      commit("GET_STATS", response.data);
     } catch (error) {
       console.error(error); // eslint-disable-line no-console
     }
@@ -64,12 +53,8 @@ const actions = {
     commit("RECEIVE_USERS", { data: updatedData });
     /* ===== SET THE LOADING STATE ===== */
     commit("loader/setLoading", false, { root: true });
-    /* ===== CALCULATE TOTAL PARTICIPANTS ===== */
-    commit("GET_TOTAL_PARTICIPANTS", updatedData.length);
-    /* ===== CALCULATE TOTAL PULL REQUESTS ===== */
-    commit("GET_TOTAL_PRS", updatedData);
-    /* ===== CALCULATE TOTAL COMPLETIONS ===== */
-    commit("GET_TOTAL_COMPLETIONS", updatedData);
+    /* ===== GET STATS ===== */
+    commit("GET_STATS", updatedData);
   }
 };
 
