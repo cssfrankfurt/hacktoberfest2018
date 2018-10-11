@@ -104,6 +104,9 @@ router.get('/data', async (req, res, next) => {
       if (users) {
         let prsPerUser = {};
         for (let i = 0; i < users.length; i++) {
+          prsPerUser[users[i].login] = {
+            prs: 0
+          };
           if (users[i].accessToken) {
             octokit.authenticate({
               type: 'oauth',
@@ -119,18 +122,13 @@ router.get('/data', async (req, res, next) => {
               obj.type === 'PullRequestEvent' &&
               obj.payload.action === 'opened' &&
               new Date(obj.payload.pull_request.created_at) >
-                new Date('2018-10-01')
+              new Date('2018-10-01')
             ) {
-              prsPerUser[users[i].login] = prsPerUser[users[i].login]
-                ? {
-                    ...prsPerUser[users[i].login],
-                    prs: prsPerUser[users[i].login].prs + 1
-                  }
-                : {
-                    latestPr: obj.payload.pull_request.created_at.split('T')[0],
-                    latestProject: obj.repo.name,
-                    prs: 1
-                  };
+              prsPerUser[users[i].login] = {
+                latestPr: obj.payload.pull_request.created_at.split('T')[0],
+                latestProject: obj.repo.name,
+                prs: prsPerUser[users[i].login].prs + 1
+              };
             }
           });
         }
@@ -142,8 +140,8 @@ router.get('/data', async (req, res, next) => {
           data.push({
             name: username,
             prs: prsPerUser[username].prs,
-            latestPr: prsPerUser[username].latestPr,
-            latestProject: prsPerUser[username].latestProject
+            latestPr: prsPerUser[username].latestPr || "N/A",
+            latestProject: prsPerUser[username].latestProject || "N/A"
           });
         }
 
