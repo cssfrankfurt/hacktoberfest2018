@@ -14,7 +14,8 @@ Vue.use(Vuetify, {
   theme: {
     primary: "#582D41",
     secondary: "#FF9A56",
-    accent: "#2B81D9"
+    accent: "#2B81D9",
+    cyan: "#01FFFF"
   },
   components: {
     VApp,

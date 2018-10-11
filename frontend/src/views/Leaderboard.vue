@@ -1,10 +1,17 @@
 <template>
-  <section class="section section-leaderboard white--text">
-    <!-- Change name to progress board? -->
-    <h1>Live Leaderboard</h1>
-    <p>Check out our leaderboard to see how our community is doing. Can't see your progress? Add yourself <button 
-      class="font-weight-bold" 
-      @click="login">here</button>!</p>
+  <section class="section section-leaderboard">
+  <div class="leaderboard-stats">
+    <img src="/hacktoberfest_title.svg" alt="hacktoberfest" class="leaderboard-header">
+    <ul class="list list-stats">
+        <li 
+          class="list-item"
+          v-for="stat in stats" 
+          :key="stat.index">
+          <div class="stat-number">{{stat.number}}</div>
+          <div class="stat-name">{{stat.name}}</div>
+        </li>
+      </ul>
+  </div>
     <v-data-table 
       id="leaderboard-table"
       :headers="headers" 
@@ -12,41 +19,53 @@
       :loading="isLoading" 
       :pagination.sync="pagination"
       :must-sort="true"
-      :hide-actions="true">
+      :hide-actions="true"
+      :no-data-text="'Fetching data...'">
+
+      <!-- LOADER BAR -->
       <v-progress-linear 
         slot="progress" 
-        color="accent" 
+        color="cyan" 
         height="3" 
         indeterminate/>
+
       <template 
         slot="items" 
         slot-scope="props">
         <!-- TOTAL PRS -->
-        <td>{{ props.item.prs }}</td>
+        <td v-if="$mq !== 'xs'">{{ props.item.prs }}</td>
+
         <!-- GITHUB USERNAME -->
         <td>
           <a 
             :href="'https://github.com/' + props.item.name" 
             rel="noopener noreferrer" 
             target="_blank" 
-            class="link-external text--black">{{ props.item.name }} 
+            class="link-external">{{ props.item.name }} 
             <!-- LINK ICON -->
             <v-icon 
               small 
               class="icon icon-link" 
               v-text="'fas fa-link'"/></a></td>
+
         <!-- PROJECT LAST CONTRIBUTED TO -->
         <td v-if="$mq !== 'xs'">
           <a 
+            v-if="props.item.latestProject !== 'N/A'"
             :href="'https://github.com/' + props.item.latestProject" 
-            class="link-external text--black" 
+            class="link-external" 
             rel="noopener noreferrer" 
             target="_blank">{{ props.item.latestProject }} 
             <!-- LINK ICON -->
             <v-icon 
               small 
               class="icon icon-link" 
-              v-text="'fas fa-link'"/></a></td>
+              v-text="'fas fa-link'"/></a>
+            <template v-else>{{props.item.latestProject}}</template>
+          </td>
+
+        <!-- TIMESTAMP OF LAST CONTRIBUTION -->
+        <td>{{props.item.latestPr}}</td>
         <!-- STATUS: COMPLETE/IN PROGRESS -->
         <td :class="{'progress--complete': props.item.prs >= 5}">
           <!-- IF MORE THAN 5 PRS -->
@@ -55,7 +74,6 @@
         <template v-else>In progress...</template></td>
       </template>
     </v-data-table>
-    <div class="total white--text">{{ totalPrs }} PRs by {{ totalUsers }} users!</div>
   </section>
 </template>
 
@@ -75,13 +93,18 @@ export default {
         value: "prs"
       },
       {
-        text: "Name (GitHub)",
+        text: "Name",
         value: "name"
       },
       {
-        text: "Latest contribution",
+        text: "Latest project",
         value: "latest",
         sortable: false
+      },
+      {
+        text: "Timestamp",
+        value: "time",
+        sortable: true
       },
       {
         text: "Status",
@@ -91,16 +114,30 @@ export default {
     ]
   }),
   computed: {
+    stats(){
+      const statsArray = [
+      {
+        name: "Pull Requests",
+        number: this.totalPrs
+      },
+      {
+        name: "Participants",
+        number: this.totalParticipants
+      },
+      {
+        name: "Completions",
+        number: this.totalCompletions
+      }
+    ]
+    return statsArray
+    },
     ...mapGetters({
       users: "api/users",
-      isLoading: "loader/isLoading"
-    }),
-    totalPrs() {
-      return this.users.reduce((total, obj) => obj.prs + total, 0);
-    },
-    totalUsers() {
-      return this.users.length;
-    }
+      isLoading: "loader/isLoading",
+      totalPrs: "api/totalPrs",
+      totalParticipants: "api/totalParticipants",
+      totalCompletions: "api/totalCompletions"
+    })
   },
   created() {
     this.fetchData();
@@ -116,28 +153,61 @@ export default {
 
 <style lang="sass">
 
+  .leaderboard-description
+    max-width: 800px
+
+  .leaderboard-header
+    max-height: 8rem
+
+  .leaderboard-stats
+    padding-bottom: 1.5rem
+    text-align: center
+
+  .heading
+    font-size: 1.5rem
+    letter-spacing: 1px
+    color: rgba(255,255,255,.8)
+
   .link-external
     color: black
     text-decoration: none
 
+  .theme--light.v-table
+    background: $color-primary
+    color: white
+    overflow: scroll
+
+  .theme--light.v-datatable thead th.column.sortable.active i
+    color: $color-cyan
+
+  table.v-table tbody td
+    font-weight: 500
+
   table.v-table thead tr
     height: 40px
 
-  table.v-table thead tr th.column
-    font-size: 14px
+  table.v-table thead tr th.column, .theme--light.v-datatable thead th.column.sortable.active, .theme--light.v-datatable thead th.column.sortable:hover
+    color: white
+    font-size: .9rem
+    text-transform: uppercase
+    letter-spacing: 1px
+    text-align: left
+
+  .theme--light.v-table tbody tr:hover:not(.v-datatable__expand-row)
+    background: hsl(332, 32%, 21%)
 
   table.v-table tbody td
-    font-size: 18px
+    font-size: 1rem
 
   table.v-table tbody td.progress--complete
-    color: $color-success
+    color: $color-secondary
     font-weight: bold
 
   .fa-sort-up
     margin-left: 5px
 
   i.v-icon.icon.icon-link
-    color: $color-accent
+    color: $color-cyan
     margin-bottom: 3px
     opacity: 0
 
@@ -149,12 +219,12 @@ export default {
     font-size: 1.5rem
     font-weight: 700
     padding-top: .5rem
-
-  .theme--light.v-table tbody tr:hover:not(.v-datatable__expand-row)
-    background: white
+  
+  .theme--light.v-table tbody tr:not(:last-child), .theme--light.v-table thead tr:first-child
+    border-bottom: 1px solid rgba(255,255,255,0.12)
 
   @media screen and (max-width: 700px)
-    .v-datatable > thead:nth-child(1) > tr:nth-child(1) th.column:nth-child(3)
+    .v-datatable > thead:nth-child(1) > tr:nth-child(1) th.column:nth-child(3), .v-datatable > thead:nth-child(1) > tr:nth-child(1) th.column:nth-child(4)
       display: none
 
     #leaderboard-table table.v-table thead th

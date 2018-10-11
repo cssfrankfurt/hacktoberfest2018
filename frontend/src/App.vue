@@ -27,7 +27,7 @@ export default {
     color: white
     background: $color-primary
     line-height: 1.3
-    @media screen and (max-width: 420px)
+    @media screen and (max-width: 768px)
       font-size: 16px
 
   #app
@@ -53,7 +53,7 @@ export default {
     margin: 0 auto
     min-height: 100vh
 
-  a
+  a.link-external, a.link-internal
     color: white
 
   p
