@@ -194,6 +194,7 @@ export default {
     color: $color-cyan
     margin-bottom: 3px
     opacity: 0
+    transition: opacity .3s ease-in-out
 
   .link-external:hover > i.v-icon.icon.icon-link
     opacity: 1
