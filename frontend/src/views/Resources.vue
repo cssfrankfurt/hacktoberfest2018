@@ -83,9 +83,15 @@ export default {
           "CSS Frankfurt is always looking for help with their website!"
       },
       {
+<<<<<<< HEAD
         title: 'cssfrankfurt/cssfrankfurt.de',
         description:
           'CSS Frankfurt is always looking for help with their website!'
+=======
+        title: "30-seconds/30-seconds-of-react",
+        description:
+          "Curated collection of useful React snippets that you can understand in 30 seconds or less"
+>>>>>>> lint
       },
       {
         title: "Did you know?",
