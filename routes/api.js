@@ -3,7 +3,7 @@ const router = express.Router();
 const debug = require('debug')('hacktoberfest2018:server');
 const axios = require('axios');
 
-const { afterPush } = require('../util/helpers');
+const { afterPush, paginate } = require('../util/helpers');
 
 const key = process.env.GITHUB_ID;
 const secret = process.env.GITHUB_SECRET;
@@ -113,10 +113,10 @@ router.get('/data', async (req, res, next) => {
               token: [users[i].accessToken]
             });
           }
-          const result = await octokit.activity.getEventsForUser({
+          const result = paginate(octokit.activity.getEventsForUser({
             username: [users[i].login],
             per_page: 100
-          });
+          }));
           result.data.forEach(obj => {
             if (
               obj.type === 'PullRequestEvent' &&
