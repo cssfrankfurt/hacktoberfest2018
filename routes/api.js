@@ -89,7 +89,7 @@ router.get('/callback', async (req, res, next) => {
     }
   );
 
-  res.redirect(rootURL + '/#/leaderboard');
+  res.redirect(rootURL + '/leaderboard');
 });
 
 /**
