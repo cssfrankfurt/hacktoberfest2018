@@ -126,8 +126,8 @@ router.get('/data', async (req, res, next) => {
                 new Date('2018-10-01')
             ) {
               prsPerUser[users[i].login] = {
-                latestPr: obj.payload.pull_request.created_at.split('T')[0],
-                latestProject: obj.repo.name,
+                latestPr: prsPerUser[users[i].login].latestPr || obj.payload.pull_request.created_at.split('T')[0],
+                latestProject: prsPerUser[users[i].login].latestProject || obj.repo.name,
                 prs: prsPerUser[users[i].login].prs + 1
               };
             }
