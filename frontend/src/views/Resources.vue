@@ -5,8 +5,6 @@
         src="/hacktoberfest_title.svg" 
         alt="hacktoberfest" 
         class="leaderboard-header">
-      <h4 class="resources-heading">License key for the Quokka.js PRO License during the Event</h4>
-      <p style="overflow-wrap: break-word; font-size: 8px;">RXh0ZW5kZWQgVHJpYWwKd2FsbGFieWpzQGdtYWlsLmNvbSxRdW9ra2EuanMgcGVyc29uYWwgbGljZW5zZQoyNi8xMC8yMDE4CkZoM2FDd2M4T1hCcFpaZHNaaHNYN0R4bGhwdnpZYkRidHF3VnNVZDMrNGtJMGRncUpOUVBiaHhKWHhoblVxdUtObUhBTExDZlZwZGNOTXJmUTRyaTU0ZXp0TWZJazhCamF3QXJMSGU3Zk5VSUpUbExMaURwelVTcy84djNxV0dGMTdSRHJZZDFMVXd3ZEFtOHd0RHNkOHZtUnFneHZOYXJyR0RKLyt5eGsxRVpGemxxcWx0cHJMSTAxMjArTFpKV1AyVnNGY1QvZlVPMVlLdjNOV2VlZ2dTRlRneVRNdTMxOFlTOUpkbHpiSlU4SitJV0VHSU9MTUNLUUtUYW9vTGxpMndVbDFaaVNURjZmQVlMV0FOVWphcE1iSVovajl0bzBHNVNVRHlrY0hHVE1aZHZqa3RNemtPbmFsdmNzN3BUdVN3RFFXbHE0T0xwRXNUMG5xMHZlZz09</p>
       <h1 class="resources-heading">Contributing to Open Source</h1>
       <p>To get off to a great start, here are some resources that you may find of use. If you have any questions, please don't hesitate to talk to others at the event or reach out to any of the organisers. We are happy to help!</p>
       <p>Contributing to Open Source is actually quite easy once you find the right project and know how to use GitHub. For an awesome guide, checkout GitHub's own excellent guide <a 
@@ -69,15 +67,20 @@ export default {
       {
         title: '30-seconds/30-seconds-of-code',
         description:
-          'Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less'
+          "Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less"
       },
       {
-        title: 'Did you know?',
+        title: "Did you know?",
         description:
-          'Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.',
+          "Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.",
         featured: true,
         url:
-          'https://github.com/search?q=label:hacktoberfest+state:open+type:issue'
+          "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
+      },
+      {
+        title: "cssfrankfurt/cssfrankfurt.de",
+        description:
+          "CSS Frankfurt is always looking for help with their website!"
       },
       {
         title: 'cssfrankfurt/cssfrankfurt.de',
@@ -85,30 +88,12 @@ export default {
           'CSS Frankfurt is always looking for help with their website!'
       },
       {
-        title: 'Did you know?',
+        title: "Did you know?",
         description:
-          'Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.',
+          "When looking for issues on GitHub, you can also filter issues based on language you know!",
         featured: true,
         url:
-          'https://github.com/search?q=label:hacktoberfest+state:open+type:issue'
-      },
-      {
-        title: 'cssfrankfurt/cssfrankfurt.de',
-        description:
-          'CSS Frankfurt is always looking for help with their website!'
-      },
-      {
-        title: '30-seconds/30-seconds-of-react',
-        description:
-          'Curated collection of useful React snippets that you can understand in 30 seconds or less'
-      },
-      {
-        title: 'Did you know?',
-        description:
-          'When looking for issues on GitHub, you can also filter issues based on language you know!',
-        featured: true,
-        url:
-          'https://github.com/search?q=label:hacktoberfest+state:open+type:issue'
+          "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
       },
       {
         title: 'matthewsamuel95/ACM-ICPC-Algorithms',
@@ -127,9 +112,9 @@ export default {
       {
         title: 'Did you know?',
         description:
-          'This year, Microsoft joined Hacktoberfest. Anyone who submits a Pull Request to one of their repositories will earn an extra T-Shirt!',
+          "This year, Microsoft joined Hacktoberfest. Anyone who submits a Pull Request to one of their repositories will earn an extra T-Shirt!",
         featured: true,
-        url: 'https://opensource.microsoft.com/'
+        url: "https://opensource.microsoft.com/"
       }
     ]
   })
