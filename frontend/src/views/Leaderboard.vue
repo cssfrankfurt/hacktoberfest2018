@@ -1,7 +1,10 @@
 <template>
   <section class="section section-leaderboard">
   <div class="leaderboard-stats">
-    <img src="/hacktoberfest_title.svg" alt="hacktoberfest" class="leaderboard-header">
+      <img 
+        src="/hacktoberfest_title.svg" 
+        alt="hacktoberfest" 
+        class="leaderboard-header">
     <ul class="list list-stats">
         <li 
           class="list-item"
