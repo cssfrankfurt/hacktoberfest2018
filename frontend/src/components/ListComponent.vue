@@ -1,43 +1,48 @@
 <template>
-    <ul class="list" :class="{'sponsor-list': itemType === 'sponsor'}">
-        <li
-          v-for="item in items"
-          :key="item.index"
-          class="list-item"
-          :class="{'logo-item': item.img}">
-          <!-- SPONSOR IF TYPE IS SPONSORS -->
-          <a v-if="itemType === 'sponsor'" :href="item.url">
-            <img
-              :src="item.img"
-              :alt="item.name"
-              class="logo-img"
-              :class="item.name">
-          </a>
-          <!-- COMMUNITY IF TYPE IS COMMUNITY  -->
-          <a v-if="itemType === 'community'"
-            :href="item.url"
-            :class="itemType"
-            class="item-link">
-            {{ item.name }}
-          </a>
-        </li>
-      </ul>
+  <ul 
+    :class="{'sponsor-list': itemType === 'sponsor'}" 
+    class="list">
+    <li
+      v-for="item in items"
+      :key="item.index"
+      :class="{'logo-item': item.img}"
+      class="list-item">
+      <!-- SPONSOR IF TYPE IS SPONSORS -->
+      <a 
+        v-if="itemType === 'sponsor'" 
+        :href="item.url">
+        <img
+          :src="item.img"
+          :alt="item.name"
+          :class="item.name"
+          class="logo-img">
+      </a>
+      <!-- COMMUNITY IF TYPE IS COMMUNITY  -->
+      <a 
+        v-if="itemType === 'community'"
+        :href="item.url"
+        :class="itemType"
+        class="item-link">
+        {{ item.name }}
+      </a>
+    </li>
+  </ul>
 </template>
 
 <script>
-  export default {
-    name: "List",
-    props: {
-      items: {
-        type: Array,
-        required: true
-      },
-      itemType: {
-        type: String,
-        required: true
-      }
+export default {
+  name: "List",
+  props: {
+    items: {
+      type: Array,
+      required: true
+    },
+    itemType: {
+      type: String,
+      required: true
     }
   }
+};
 </script>
 
 <style lang="sass">

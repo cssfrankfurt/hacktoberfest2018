@@ -7,18 +7,24 @@
         alt="Hacktoberfest Frankfurt">
     </div>
     <ul class="list list-stats">
-        <li 
-          class="list-item"
-          v-for="stat in stats" 
-          :key="stat.index">
-          <div class="stat-number">{{stat.number}}</div>
-          <div class="stat-name">{{stat.name}}</div>
-        </li>
-      </ul>
+      <li 
+        v-for="stat in stats"
+        :key="stat.index" 
+        class="list-item">
+        <div class="stat-number">{{ stat.number }}</div>
+        <div class="stat-name">{{ stat.name }}</div>
+      </li>
+    </ul>
     <article class="article article-community">
-      <list-component class="community-list" :items="communities" :itemType="'community'"/>
+      <list-component 
+        :items="communities" 
+        :item-type="'community'" 
+        class="community-list"/>
       <h2 class="sponsor-heading">Sponsored by</h2>
-      <list-component class="sponsor-list" :items="sponsors" :itemType="'sponsor'"/>
+      <list-component 
+        :items="sponsors" 
+        :item-type="'sponsor'" 
+        class="sponsor-list"/>
     </article>
   </section>
 </template>
@@ -36,32 +42,32 @@ export default {
       {
         name: "melsicon",
         url: "https://melsicon.de",
-        img: './sponsors/melsicon.svg'
+        img: "./sponsors/melsicon.svg"
       },
       {
         name: "rocketloop",
-        url: 'https://rocketloop.de',
-        img: './sponsors/rocketloop.svg'
+        url: "https://rocketloop.de",
+        img: "./sponsors/rocketloop.svg"
       },
       {
         name: "mindspace",
         url: "https://mindspace.me",
-        img: './sponsors/mindspace.svg'
+        img: "./sponsors/mindspace.svg"
       },
       {
         name: "msg",
-        url: 'https://msg.group',
-        img: './sponsors/msg.svg'
+        url: "https://msg.group",
+        img: "./sponsors/msg.svg"
       },
       {
         name: "codemonauts",
         url: "https://codemonauts.com",
-        img: './sponsors/codemonauts.svg'
+        img: "./sponsors/codemonauts.svg"
       },
       {
         name: "uib GmbH",
         url: "https://uib.de",
-        img: './sponsors/uib.svg'
+        img: "./sponsors/uib.svg"
       },
       {
         name: "quokkajs",
@@ -71,17 +77,17 @@ export default {
       {
         name: "DigitalOcean",
         url: "https://digitalocean.com",
-        img: './sponsors/digitalocean.svg'
+        img: "./sponsors/digitalocean.svg"
       },
       {
         name: "GitHub",
         url: "https://github.com",
-        img: './sponsors/github.svg'
+        img: "./sponsors/github.svg"
       },
       {
         name: "Twilio",
         url: "https://twilio.com",
-        img: './sponsors/twilio.svg'
+        img: "./sponsors/twilio.svg"
       }
     ],
     communities: [
@@ -132,23 +138,23 @@ export default {
     ]
   }),
   computed: {
-    stats(){
+    stats() {
       const statsArray = [
-      {
-        name: "Communities",
-        number: '10+'
-      },
-      {
-        name: "Participants",
-        number: '140+'
-      },
-      {
-        name: "Sponsors",
-        number: this.sponsors.length
-      }
-    ]
-    return statsArray
-    },
+        {
+          name: "Communities",
+          number: "10+"
+        },
+        {
+          name: "Participants",
+          number: "140+"
+        },
+        {
+          name: "Sponsors",
+          number: this.sponsors.length
+        }
+      ];
+      return statsArray;
+    }
   },
   methods: {
     ...mapActions({

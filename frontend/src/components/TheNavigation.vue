@@ -1,7 +1,10 @@
 <template>
   <nav class="nav">
     <router-link to="/">
-      <img class="nav-logo" src="/hacktoberfest_small.svg" alt="Hacktoberfest">
+      <img 
+        class="nav-logo" 
+        src="/hacktoberfest_small.svg" 
+        alt="Hacktoberfest">
     </router-link>
     <div class="nav-wrapper primary">
       <router-link 

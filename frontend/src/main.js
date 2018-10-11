@@ -7,11 +7,6 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store/store";
 
-const env = process.env.NODE_ENV || "dev";
-/* const rootURL = // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de' env === "dev"
-    ? "http://localhost:5000"
-    : "https://hacktoberfest-frankfurt.herokuapp.com"; */
-
 Vue.config.productionTip = false;
 
 const socket = io("https://hacktoberfestffm.de");
