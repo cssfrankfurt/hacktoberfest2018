@@ -70,7 +70,7 @@ export default {
     font-weight: 500
     margin: .1rem .5rem
     &.community
-      color: $color-secondary
+      color: $color-cyan
       font-size: 1.2rem
 
   .logo-item

@@ -16,6 +16,7 @@
       </li>
     </ul>
     <article class="article article-community">
+      <h2 class="sponsor-heading">Participating communities</h2>
       <list-component 
         :items="communities" 
         :item-type="'community'" 
@@ -193,12 +194,19 @@ export default {
     font-size: 2.5rem
     font-weight: 700
 
-  .stat-name, .sponsor-heading
+  .stat-name
     text-align: center
     text-transform: uppercase
     font-size: .9rem
     font-weight: 700
     letter-spacing: 1px
     opacity: .7
+
+  .sponsor-heading
+    text-transform: uppercase
+    font-size: .9rem
+    text-align: center
+    letter-spacing: 1px
+    color: $color-secondary
 
 </style>
