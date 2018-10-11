@@ -80,4 +80,7 @@
   .uib
     max-height: 2.5rem
 
+  .quokkajs
+    max-height: 3rem
+
 </style>

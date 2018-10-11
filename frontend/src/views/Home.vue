@@ -64,6 +64,11 @@ export default {
         img: './sponsors/uib.svg'
       },
       {
+        name: "quokkajs",
+        url: "https://quokkajs.com",
+        img: "./sponsors/quokkajs.svg"
+      },
+      {
         name: "DigitalOcean",
         url: "https://digitalocean.com",
         img: './sponsors/digitalocean.svg'
