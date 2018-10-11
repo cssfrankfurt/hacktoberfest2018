@@ -60,6 +60,49 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'Resources',
+  data: () => ({
+    projects: [
+      {
+        featured: true,
+        title: 'cssfrankfurt/hacktoberfest2018',
+        description: 'The Hacktoberfest Frankfurt Website!'
+      },
+      {
+        title: 'freeCodeCamp/guide',
+        description: 'A collection of guides to programming'
+      },
+      {
+        title: '30-seconds/30-seconds-of-code',
+        description:
+          'Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less'
+      },
+      {
+        title: '30-seconds/30-seconds-of-react',
+        description:
+          'Curated collection of useful React snippets that you can understand in 30 seconds or less'
+      },
+      {
+        title: 'matthewsamuel95/ACM-ICPC-Algorithms',
+        description: 'Multi-lingual algorithms for competitive programming'
+      },
+      {
+        title: '30-seconds/30-seconds-of-css',
+        description:
+          'Curated collection of useful CSS snippets that you can understand in 30 seconds or less'
+      },
+      {
+        title: '30-seconds/30-seconds-of-interviews',
+        description:
+          'Common interview questions to help you prepare for your next interview'
+      }
+    ]
+  })
+};
+</script>
+
 <style lang="sass">
 blockquote
   border-left: 10px solid $color-secondary
