@@ -40,7 +40,7 @@
         slot="items" 
         slot-scope="props">
         <!-- TOTAL PRS -->
-        <td v-if="$mq !== 'xs'">{{ props.item.prs }}</td>
+        <td>{{ props.item.prs }}</td>
 
         <!-- GITHUB USERNAME -->
         <td>
@@ -72,7 +72,7 @@
           </td>
 
         <!-- TIMESTAMP OF LAST CONTRIBUTION -->
-        <td>{{props.item.latestPr}}</td>
+        <td v-if="$mq !== 'xs'">{{ props.item.latestPr }}</td>
         <!-- STATUS: COMPLETE/IN PROGRESS -->
         <td :class="{'progress--complete': props.item.prs >= 5}">
           <!-- IF MORE THAN 5 PRS -->
