@@ -122,7 +122,7 @@ router.get('/data', async (req, res, next) => {
               obj.type === 'PullRequestEvent' &&
               obj.payload.action === 'opened' &&
               new Date(obj.payload.pull_request.created_at) >
-              new Date('2018-10-01')
+                new Date('2018-10-01')
             ) {
               prsPerUser[users[i].login] = {
                 latestPr: obj.payload.pull_request.created_at.split('T')[0],
@@ -140,8 +140,8 @@ router.get('/data', async (req, res, next) => {
           data.push({
             name: username,
             prs: prsPerUser[username].prs,
-            latestPr: prsPerUser[username].latestPr || "N/A",
-            latestProject: prsPerUser[username].latestProject || "N/A"
+            latestPr: prsPerUser[username].latestPr || 'N/A',
+            latestProject: prsPerUser[username].latestProject || 'N/A'
           });
         }
 
