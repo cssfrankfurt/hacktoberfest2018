@@ -26,10 +26,10 @@
           </p>
         </blockquote>
         <h4 class="white--text">Here are some of our picks:</h4>
-        <ul>
-          <li v-for="project in projects" :key="project.index" v-bind:class="{ 'featured': (project.featured)}">
+        <ul class="projectlist">
+          <li v-for="project in projects" :key="project.index">
             <a class="white--text" :href="'https://github.com' + project.title">{{project.title}}</a>
-            <p>{{project.description}}</p>
+            <p v-bind:class="{ 'featured': (project.featured)}">{{project.description}}</p>
           </li>
         </ul>
     </div>
@@ -80,6 +80,9 @@ export default {
 </script>
 
 <style lang="sass">
+.white--text
+  color: white
+
 blockquote
   border-left: 10px solid $color-secondary
   margin: 1.5em 10px
@@ -101,4 +104,12 @@ blockquote p
 .content
   max-width: 800px
   font-size: 18px
+  margin: auto
+
+.projectlist
+  margin-top: 10px
+
+ul
+  list-style: none
+  padding-left: 10px
 </style>
