@@ -113,7 +113,11 @@ router.get('/data', async (req, res, next) => {
               token: [users[i].accessToken]
             });
           }
-          const result = await paginate(octokit, octokit.activity.getEventsForUser, [users[i].login]);
+          const result = await paginate(
+            octokit,
+            octokit.activity.getEventsForUser,
+            [users[i].login]
+          );
           result.forEach(obj => {
             if (
               obj.type === 'PullRequestEvent' &&

@@ -9,18 +9,21 @@ const afterPush = err => {
 };
 
 const paginate = async (octokit, method, username) => {
-  let response = await method({ per_page: 100, username })
-  let { data } = response
+  let response = await method({ per_page: 100, username });
+  let { data } = response;
   while (octokit.hasNextPage(response)) {
-    response = await octokit.getNextPage(response)
-    if(new Date(response.data[response.data.length -1].created_at) < new Date('2018-10-01')) {
-      data = data.concat(response.data)
+    response = await octokit.getNextPage(response);
+    if (
+      new Date(response.data[response.data.length - 1].created_at) <
+      new Date('2018-10-01')
+    ) {
+      data = data.concat(response.data);
       break;
     }
-    data = data.concat(response.data)    
+    data = data.concat(response.data);
   }
-  return data
-}
+  return data;
+};
 
 module.exports = {
   afterPush,
