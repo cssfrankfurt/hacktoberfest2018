@@ -1,12 +1,12 @@
 <template>
   <section class="section section-resources">
-      <article class="article">
-        <img 
+    <article class="article">
+      <img 
         src="/hacktoberfest_title.svg" 
         alt="hacktoberfest" 
         class="leaderboard-header">
-        <h1 class="resources-heading">Contributing to Open Source</h1>
-        <p>To get off to a great start, here are some resources that you may find of use. If you have any questions, please don't hesitate to talk to others at the event or reach out to any of the organisers. We are happy to help!</p>
+      <h1 class="resources-heading">Contributing to Open Source</h1>
+      <p>To get off to a great start, here are some resources that you may find of use. If you have any questions, please don't hesitate to talk to others at the event or reach out to any of the organisers. We are happy to help!</p>
       <p>Contributing to Open Source is actually quite easy once you find the right project and know how to use GitHub. For an awesome guide, checkout GitHub's own excellent guide <a 
         class="inline-link" 
         href="https://opensource.guide/how-to-contribute/">here</a>!</p>
@@ -14,10 +14,10 @@
       <p>It can be find finding projects to contribute to, but we've put together a list of useful links you can check out to save yourself some time! We also encourage you to ask around at our event, maybe you find someone to collaborate with!</p>
       <ul class="project-list">
         <li 
-          class="project-item"
+          v-for="project in projects"
           :class="{featured: project.featured}"
-          v-for="project in projects" 
-          :key="project.index">
+          :key="project.index" 
+          class="project-item">
           <a 
             v-if="!project.featured"
             :href="'https://github.com' + project.title" 
@@ -27,7 +27,7 @@
               class="icon icon-link" 
               v-text="'fas fa-link'"/>
             <p class="project-name">{{ project.title }}</p>
-            <p class="project-description">{{ project.description }}</p></a>
+          <p class="project-description">{{ project.description }}</p></a>
           <a 
             v-if="project.featured"
             :href="project.url" 
@@ -37,10 +37,10 @@
               class="icon icon-link" 
               v-text="'fas fa-link'"/>
             <p class="project-name">{{ project.title }}</p>
-            <p class="project-description">{{ project.description }}</p></a>
+          <p class="project-description">{{ project.description }}</p></a>
         </li>
       </ul>
-      </article>
+    </article>
   </section>
 </template>
 
@@ -49,7 +49,7 @@ export default {
   name: "Resources",
   data: () => ({
     projects: [
-        {
+      {
         featured: true,
         title: "Beginner Friendly Projects",
         description: "A great list of lots of beginner friendly projects!",
@@ -66,17 +66,20 @@ export default {
       {
         title: "30-seconds/30-seconds-of-code",
         description:
-          "Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less",
+          "Curated collection of useful JavaScript snippets that you can understand in 30 seconds or less"
       },
       {
         title: "Did you know?",
-        description: "Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.",
+        description:
+          "Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.",
         featured: true,
-        url: "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
+        url:
+          "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
       },
       {
         title: "cssfrankfurt/cssfrankfurt.de",
-        description: "CSS Frankfurt is always looking for help with their website!"
+        description:
+          "CSS Frankfurt is always looking for help with their website!"
       },
       {
         title: "30-seconds/30-seconds-of-react",
@@ -85,9 +88,11 @@ export default {
       },
       {
         title: "Did you know?",
-        description: "When looking for issues on GitHub, you can also filter issues based on language you know!",
+        description:
+          "When looking for issues on GitHub, you can also filter issues based on language you know!",
         featured: true,
-        url: "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
+        url:
+          "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
       },
       {
         title: "matthewsamuel95/ACM-ICPC-Algorithms",
@@ -107,8 +112,8 @@ export default {
         title: "Did you know?",
         description:
           "This year, Microsoft joined Hacktoberfest. Anyone who submits a Pull Request to one of their repositories will earn an extra T-Shirt!",
-          featured: true,
-          url: "https://opensource.microsoft.com/"
+        featured: true,
+        url: "https://opensource.microsoft.com/"
       }
     ]
   })
