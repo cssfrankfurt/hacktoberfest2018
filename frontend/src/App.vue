@@ -74,7 +74,7 @@ export default {
     padding: 1rem 1rem
 
   button
-    color: $color-primary
+    color: white
     font-weight: 700
     font-family: 'Roboto', Helvetica, Arial, sans-serif
     background: $color-cyan
