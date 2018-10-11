@@ -10,7 +10,7 @@
       <router-link 
         v-for="route in $router.options.routes"
         :key="route.index"
-        :class="{activeRoute: $route.name === route.name}" 
+        :class="{'active-route': $route.name === route.name}" 
         :to="route.path" 
         class="router-link">{{ route.name }}</router-link>
     </div>
@@ -33,11 +33,10 @@
   .nav-wrapper
     display: flex
     text-align: right
-    max-width: 1280px
     flex-basis: 100%
     margin: auto
     justify-content: flex-end
-    padding: .8em 0
+    padding: .8em 1rem
 
     .router-link
       color: white
@@ -50,11 +49,11 @@
       @media screen and (max-width: 320px)
         margin-left: .5rem
 
-  .activeRoute
+  .active-route
     border-bottom: 1px solid $color-cyan
 
-  .routerlink:focus
-    outline: 2px dotted $color-accent
+  .router-link:focus
+    outline: 2px dotted $color-secondary
     outline-offset: 5px
 
   .nav-logo
