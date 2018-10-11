@@ -172,7 +172,8 @@ export default {
   .main-img
     max-width: 500px
     text-align: center
-    margin: auto
+    padding: 1rem 0
+    margin: 0 auto
 
   .hacktoberfest-img
     width: 100%

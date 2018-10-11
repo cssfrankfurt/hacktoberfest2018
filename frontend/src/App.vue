@@ -49,12 +49,13 @@ export default {
     display: flex
     flex-direction: column
     flex-wrap: wrap
-    max-width: 1300px
+    max-width: 1400px
     margin: 0 auto
     min-height: 100vh
 
   a.link-external, a.link-internal
     color: white
+    text-decoration: none
 
   p
     margin-bottom: 1rem
@@ -74,20 +75,24 @@ export default {
     padding: 1rem 1rem
 
   button
-    color: $color-primary
+    color: white
     font-weight: 700
     font-family: 'Roboto', Helvetica, Arial, sans-serif
-    background: $color-cyan
+    background: $color-accent
     border: 0
     text-transform: uppercase
     letter-spacing: 1px
     font-size: 1rem
-    padding: .5rem 2rem
+    padding: .5rem 1rem
     border-radius: .1rem
     box-shadow: 0 .2rem .2rem hsl(332, 32%, 23%)
+    cursor: pointer
     &:active
       transform: translate3d(.05rem, .05rem, .05rem)
       box-shadow: 0
+    &:focus
+      outline: 2px dotted $color-secondary
+      outline-offset: 5px
 
   .link-internal
     font-weight: 600
