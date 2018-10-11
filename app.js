@@ -19,6 +19,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/dist')));
 
+const handler = (req, res) =>
+  res.sendFile(path.join(__dirname, 'frontend/dist/index.html'));
+
+const routes = ['/', '/leaderboard', '/resources'];
+routes.forEach(route => app.get(route, handler));
+
 app.use('/api', router);
 
 // catch 404 and forward to error handler
