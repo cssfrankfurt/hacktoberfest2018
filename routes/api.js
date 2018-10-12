@@ -31,7 +31,7 @@ router.get('/login', (req, res, next) => {
   debug('[AUTH] Redirecting to Github Authorization');
   res.send(
     'https://github.com/login/oauth/authorize?' +
-      `client_id=${key}&scope=read:user,repo:status` +
+      `client_id=${key}&scope=read:user` +
       `&redirect_uri=${callbackUrl}`
   );
 });
