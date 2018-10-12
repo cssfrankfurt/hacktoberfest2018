@@ -83,6 +83,19 @@ export default {
           "CSS Frankfurt is always looking for help with their website!"
       },
       {
+        title: "Did you know?",
+        description:
+          "Any GitHub issue labeled with Hacktoberfest is intended for Hacktoberfest contributions.",
+        featured: true,
+        url:
+          "https://github.com/search?q=label:hacktoberfest+state:open+type:issue"
+      },
+      {
+        title: "cssfrankfurt/cssfrankfurt.de",
+        description:
+          "CSS Frankfurt is always looking for help with their website!"
+      },
+      {
         title: "30-seconds/30-seconds-of-react",
         description:
           "Curated collection of useful React snippets that you can understand in 30 seconds or less"
