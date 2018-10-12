@@ -9,7 +9,6 @@ const key = process.env.GITHUB_ID;
 const secret = process.env.GITHUB_SECRET;
 const env = process.env.NODE_ENV || 'dev';
 const rootURL =
-  // env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
   env === 'dev' ? 'http://localhost:5000' : 'https://hacktoberfestffm.de';
 const callbackUrl = rootURL + '/api/callback';
 
