@@ -53,9 +53,12 @@ export default {
     margin: 0 auto
     min-height: 100vh
 
-  a.link-external, a.link-internal
+  a, a.link-external, a.inline-link
     color: white
     text-decoration: none
+    &.inline-link
+      font-weight: 500
+      border-bottom: 1px solid $color-cyan
 
   p
     margin-bottom: 1rem

@@ -15,6 +15,7 @@
         </li>
       </ul>
       <div class="join-us">
+        <p>Remember to signup for the official hacktoberfest challenge <a class="inline-link" href="https://hacktoberfest.digitalocean.com">here!</a></p>
         <p>Want to track your progress live at our event?</p>
         <button 
           tabindex="0" 
@@ -157,7 +158,7 @@ export default {
     text-align: center
 
   #leaderboard-table
-    padding: 1rem 2rem
+    padding: 1rem
 
   .theme--light.v-table
     background: $color-primary
@@ -196,6 +197,7 @@ export default {
     color: $color-cyan
     margin-bottom: 3px
     opacity: 0
+    transition: opacity .3s ease-in-out
 
   .link-external:hover > i.v-icon.icon.icon-link
     opacity: 1
@@ -205,7 +207,7 @@ export default {
     font-size: 1.5rem
     font-weight: 700
     padding-top: .5rem
-  
+
   .theme--light.v-table tbody tr:not(:last-child), .theme--light.v-table thead tr:first-child
     border-bottom: 1px solid rgba(255,255,255,0.12)
 
