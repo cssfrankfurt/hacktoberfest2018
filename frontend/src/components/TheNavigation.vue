@@ -9,9 +9,10 @@
     <div class="nav-wrapper primary">
       <router-link 
         v-for="route in $router.options.routes"
-        :key="route.index"
-        :class="{'active-route': $route.name === route.name}" 
-        :to="route.path" 
+        v-if="route.name !== 'coc' && route.name !== 'rg'"
+        :key="route.index" 
+        :class="{'active-route': $route.name === route.name}"
+        :to="route.path"
         class="router-link">{{ route.name }}</router-link>
     </div>
   </nav>
