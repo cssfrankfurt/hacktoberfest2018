@@ -107,34 +107,36 @@ router.get('/data', async (req, res, next) => {
           prsPerUser[users[i].login] = {
             prs: 0
           };
-          if (users[i].accessToken) {
+          try {
             octokit.authenticate({
               type: 'oauth',
               token: [users[i].accessToken]
             });
+            const result = await paginate(
+              octokit,
+              octokit.activity.getEventsForUser,
+              [users[i].login]
+            );
+            result.forEach(obj => {
+              if (
+                obj.type === 'PullRequestEvent' &&
+                obj.payload.action === 'opened' &&
+                new Date(obj.payload.pull_request.created_at) >
+                  new Date('2018-10-12T16:00:29.170Z')
+              ) {
+                prsPerUser[users[i].login] = {
+                  latestPr:
+                    prsPerUser[users[i].login].latestPr ||
+                    obj.payload.pull_request.created_at.split('T')[0],
+                  latestProject:
+                    prsPerUser[users[i].login].latestProject || obj.repo.name,
+                  prs: prsPerUser[users[i].login].prs + 1
+                };
+              }
+            });
+          } catch (err) {
+            console.log(users[i].login, users[i].accessToken);
           }
-          const result = await paginate(
-            octokit,
-            octokit.activity.getEventsForUser,
-            [users[i].login]
-          );
-          result.forEach(obj => {
-            if (
-              obj.type === 'PullRequestEvent' &&
-              obj.payload.action === 'opened' &&
-              new Date(obj.payload.pull_request.created_at) >
-                new Date('2018-10-12T16:00:29.170Z')
-            ) {
-              prsPerUser[users[i].login] = {
-                latestPr:
-                  prsPerUser[users[i].login].latestPr ||
-                  obj.payload.pull_request.created_at.split('T')[0],
-                latestProject:
-                  prsPerUser[users[i].login].latestProject || obj.repo.name,
-                prs: prsPerUser[users[i].login].prs + 1
-              };
-            }
-          });
         }
 
         let data = [];
