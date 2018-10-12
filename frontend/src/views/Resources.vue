@@ -21,7 +21,7 @@
           class="project-item">
           <a 
             v-if="!project.featured"
-            :href="'https://github.com' + project.title" 
+            :href="'https://github.com/' + project.title" 
             class="link-external list-link">
             <v-icon 
               small 
