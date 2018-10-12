@@ -10,6 +10,7 @@
       <p>Contributing to Open Source is actually quite easy once you find the right project and know how to use GitHub. For an awesome guide, checkout GitHub's own excellent guide <a 
         class="inline-link" 
         href="https://opensource.guide/how-to-contribute/">here</a>!</p>
+          <p>Haven't signed up for Hacktoberfest yet? <a class="inline-link" href="https://hacktoberfest.digitalocean.com">Sign up now!</a></p>
       <h2>Where to contribute?</h2>
       <p>It can be find finding projects to contribute to, but we've put together a list of useful links you can check out to save yourself some time! We also encourage you to ask around at our event, maybe you find someone to collaborate with!</p>
       <ul class="project-list">
@@ -127,6 +128,9 @@ export default {
 
   .resources-heading
     margin-top: 1rem
+  
+  .sign-up
+    margin-bottom: 1rem
 
   .project-list
     list-style-type: none
@@ -142,7 +146,7 @@ export default {
     margin: .5rem
     border-left: .5rem solid $color-secondary
     border-radius: .3rem
-    background: hsl(332, 32%, 25%)
+    background: white
     transition: all .3s ease-in-out
     &:hover
       transform: scale(1.03)
@@ -151,19 +155,20 @@ export default {
     border-left: .5rem solid $color-cyan
 
   .project-name
-    color: white
+    color: $color-primary
     font-weight: 500
     margin-bottom: .3rem
 
   .project-description
     margin: 0
     margin: .5rem 0
-  
+    color: $color-primary
+
   .v-icon.icon-link
     position: absolute
     right: 0
     bottom: 0
-    color: $color-cyan
+    color: $color-accent
     margin-bottom: 3px
     padding: .5rem
     opacity: 0
