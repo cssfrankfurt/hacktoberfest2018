@@ -47,6 +47,8 @@
       font-weight: 500
       text-decoration: none
       font-size: 1rem
+      :first-child
+        margin-left: 0
       @media screen and (max-width: 320px)
         margin-left: .5rem
 
