@@ -66,7 +66,7 @@ router.get('/callback', async (req, res, next) => {
   await usersDB.on(
     'value',
     data => {
-      let users = data.val() || {};
+      let users = data.val();
       if (Object.values(users).some(u => u.login === login)) {
         debug('User already in database');
       } else {
@@ -96,7 +96,7 @@ router.get('/callback', async (req, res, next) => {
  */
 router.get('/data', async (req, res, next) => {
   const gotAll = async data => {
-    let users = await data.val() || {};
+    let users = await data.val();
     users = Object.values(users);
 
     if (Math.floor((new Date() - lastfetched) / 1000 / 60) > 5) {
