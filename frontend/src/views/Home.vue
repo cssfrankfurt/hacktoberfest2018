@@ -16,11 +16,13 @@
       </li>
     </ul>
     <article class="article article-community">
+      <!-- PARTICIPATING COMMUNITIES LIST -->
       <h2 class="sponsor-heading">Participating communities</h2>
       <list-component 
         :items="communities" 
         :item-type="'community'" 
         class="community-list"/>
+      <!-- SPONSOR LIST -->
       <h2 class="sponsor-heading">Sponsored by</h2>
       <list-component 
         :items="sponsors" 
@@ -40,7 +42,7 @@ export default {
   },
   data: () => ({
     stats: [
-      {
+        {
           name: "Communities",
           number: "10+"
         },
@@ -51,7 +53,7 @@ export default {
         {
           name: "Sponsors",
           number: "10"
-    }
+        }
       ]
   }),
   computed: {
@@ -59,7 +61,7 @@ export default {
     ...mapState({
       communities: state => state.communities.communities,
       sponsors: state => state.sponsors.sponsors
-    })
+  })
   }
 };
 </script>

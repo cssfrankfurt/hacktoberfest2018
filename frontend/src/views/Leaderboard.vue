@@ -15,11 +15,11 @@
         </li>
       </ul>
       <div class="join-us">
-        <p>Remember to signup for the official hacktoberfest challenge <a class="inline-link" href="https://hacktoberfest.digitalocean.com">here!</a></p>
+        <p>Remember to sign up for the official hacktoberfest challenge <a class="inline-link" href="https://hacktoberfest.digitalocean.com">here!</a></p>
         <p>Want to track your progress live at our event?</p>
         <button 
           tabindex="0" 
-          @click="login"> Join us </button>
+          @click="signup"> Join us </button>
       </div>
     </div>
     <v-data-table 
@@ -91,11 +91,13 @@
 import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
+    // TABLE PAGINATION CONFIG, MORE INFO IN VUETIFY DOCS
     pagination: {
       sortBy: "prs",
       descending: true,
       rowsPerPage: 100
     },
+    // HEADERS FOR THE TABLE
     headers: [
       {
         text: "PRs",
@@ -124,6 +126,7 @@ export default {
     ]
   }),
   computed: {
+    // GETTING USERS, LOADING STATE AND STATS FROM THE STORE
     ...mapGetters({
       users: "api/users",
       isLoading: "loader/isLoading",
@@ -134,8 +137,9 @@ export default {
     this.fetchData();
   },
   methods: {
+    // GET SIGNUP AND DATA FETCH METHOD FROM STORE
     ...mapActions({
-      login: "login/login",
+      signup: "signup/signup",
       fetchData: "api/FETCH_USERS"
     })
   }

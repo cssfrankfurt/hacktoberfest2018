@@ -7,7 +7,7 @@
       :key="item.index"
       :class="{'logo-item': item.img}"
       class="list-item">
-      <!-- SPONSOR IF TYPE IS SPONSORS -->
+      <!-- LINK IF TYPE IS SPONSOR -->
       <a 
         v-if="itemType === 'sponsor'" 
         :href="item.url">
@@ -17,7 +17,7 @@
           :class="item.name"
           class="logo-img">
       </a>
-      <!-- COMMUNITY IF TYPE IS COMMUNITY  -->
+      <!-- LINK IF TYPE IS COMMUNITY  -->
       <a 
         v-if="itemType === 'community'"
         :href="item.url"
