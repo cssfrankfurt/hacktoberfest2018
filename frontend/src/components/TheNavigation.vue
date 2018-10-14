@@ -38,6 +38,8 @@
     margin: auto
     justify-content: flex-end
     padding: .8em 1rem
+    @media screen and (max-width: 420px)
+      padding: 0
 
     .router-link
       color: white
@@ -47,10 +49,10 @@
       font-weight: 500
       text-decoration: none
       font-size: 1rem
-      :first-child
-        margin-left: 0
-      @media screen and (max-width: 320px)
+      @media screen and (max-width: 420px)
         margin-left: .5rem
+      &:first-child
+        margin-left: 0
 
   .active-route
     border-bottom: 1px solid $color-cyan
@@ -58,6 +60,8 @@
   .router-link:focus
     outline: 2px dotted $color-secondary
     outline-offset: 5px
+    @media screen and (max-width: 420px)
+      outline-offset: 2px
 
   .nav-logo
     max-height: 2rem
