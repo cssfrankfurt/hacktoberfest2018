@@ -4,7 +4,7 @@
       <img 
         class="hacktoberfest-img" 
         src="/hacktoberfest.svg" 
-        alt="Hacktoberfest Frankfurt">
+        alt="Hacktoberfest Brno">
     </div>
     <ul class="list list-stats">
       <li 
