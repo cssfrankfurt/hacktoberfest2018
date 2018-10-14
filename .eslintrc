@@ -4,11 +4,10 @@
     "ecmaVersion": 6,
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true,
-      "arrowFunctions": true
+      "jsx": true
     }
-	},
-	"env": {
+  },
+  "env": {
     "node": true,
     "es6": true
   },
@@ -20,9 +19,18 @@
         "SwitchCase": 1
       }
     ],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "no-console": 0
   }
 }
