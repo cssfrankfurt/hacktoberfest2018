@@ -1,10 +1,8 @@
 <template>
   <footer class="footer">
-    <div class="footer-wrapper">
       <router-link class="footer-link" to="/coc">Code of Conduct</router-link>
-      <a class="footer-link" href="https://hacktoberfest.digitalocean.com">Official Website</a>
       <a class="footer-link" href="https://twitter.com/hacktoberffm">@hacktoberffm</a>
-    </div>
+      <a class="footer-link" href="https://hacktoberfest.digitalocean.com">Official Website</a>
   </footer>
 </template>
 
@@ -17,19 +15,15 @@ export default {
 <style lang="sass">
 
   .footer
-    padding: .5rem 0
-    background: hsl(332, 32%, 23%)
-
-  .footer-wrapper
-    max-width: 1280px
     margin: 0 auto
-    height: 100%
     display: flex
     justify-content: center
-    color: white
-  
+    padding-bottom: .5rem
+    text-align: center
+
   .footer-link
     color: white
+    font-size: .9rem
     font-weight: 500
     text-decoration: none
     margin: 0 1rem
