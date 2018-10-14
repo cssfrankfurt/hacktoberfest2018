@@ -136,7 +136,8 @@ router.get('/data', async (req, res, next) => {
               }
             });
           } catch (err) {
-            console.log(users[i].login, users[i].accessToken);
+            console.error(err);
+            console.error(users[i].login, users[i].accessToken);
           }
         }
 
