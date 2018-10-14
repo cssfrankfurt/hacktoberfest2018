@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const actions = {
-  async login() {
+  async signup() {
     try {
       const response = await axios.get("/api/login");
       window.location = response.data;
