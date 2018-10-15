@@ -20,8 +20,6 @@
     "yarn": "1.9.4"
   },
   "dependencies": {
-    "@firebase/app-types": "^0.3.2",
-    "@firebase/database-types": "^0.3.2",
     "@octokit/rest": "^15.13.0",
     "axios": "^0.18.0",
     "cookie-parser": "~1.4.3",
@@ -36,7 +34,7 @@
     "socket.io": "^2.1.1"
   },
   "devDependencies": {
-    "eslint": "^5.7.0",
+    "eslint": "^5.6.01",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
