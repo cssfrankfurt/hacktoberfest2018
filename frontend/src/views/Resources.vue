@@ -7,7 +7,7 @@
         class="leaderboard-header">
       <h1 class="resources-heading">Contributing to Open Source</h1>
       <p>To get off to a great start, here are some resources that you may find of use. If you have any questions, please don't hesitate to talk to others at the event or reach out to any of the organisers. We are happy to help!</p>
-      <p>Contributing to Open Source is actually quite easy once you find the right project and know how to use GitHub. For an awesome guide, checkout GitHub's own excellent guide <a 
+      <p>Contributing to Open Source is actually quite easy once you find the right project and know how to use GitHub. For an awesome guide, checkout GitHub's own excellent guide!<a 
         class="inline-link" 
         href="https://opensource.guide/how-to-contribute/">here</a>!</p>
           <p>Haven't signed up for Hacktoberfest yet? <a class="inline-link" href="https://hacktoberfest.digitalocean.com">Sign up now!</a></p>
