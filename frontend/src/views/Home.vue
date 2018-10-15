@@ -34,7 +34,7 @@
 
 <script>
 import ListComponent from "@/components/ListComponent";
-import { mapActions, mapState } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
