@@ -16,11 +16,13 @@
       </li>
     </ul>
     <article class="article article-community">
+      <!-- PARTICIPATING COMMUNITIES LIST -->
       <h2 class="sponsor-heading">Participating communities</h2>
       <list-component 
         :items="communities" 
         :item-type="'community'" 
         class="community-list"/>
+      <!-- SPONSOR LIST -->
       <h2 class="sponsor-heading">Sponsored by</h2>
       <list-component 
         :items="sponsors" 
@@ -32,115 +34,14 @@
 
 <script>
 import ListComponent from "@/components/ListComponent";
-import { mapActions } from "vuex";
+import { mapState } from "vuex";
 export default {
   name: "Home",
   components: {
     ListComponent
   },
   data: () => ({
-    sponsors: [
-      {
-        name: "melsicon",
-        url: "https://melsicon.de",
-        img: "./sponsors/melsicon.svg"
-      },
-      {
-        name: "rocketloop",
-        url: "https://rocketloop.de",
-        img: "./sponsors/rocketloop.svg"
-      },
-      {
-        name: "mindspace",
-        url: "https://mindspace.me",
-        img: "./sponsors/mindspace.svg"
-      },
-      {
-        name: "msg",
-        url: "https://msg.group",
-        img: "./sponsors/msg.svg"
-      },
-      {
-        name: "codemonauts",
-        url: "https://codemonauts.com",
-        img: "./sponsors/codemonauts.svg"
-      },
-      {
-        name: "uib GmbH",
-        url: "https://uib.de",
-        img: "./sponsors/uib.svg"
-      },
-      {
-        name: "quokkajs",
-        url: "https://quokkajs.com",
-        img: "./sponsors/quokkajs.svg"
-      },
-      {
-        name: "DigitalOcean",
-        url: "https://digitalocean.com",
-        img: "./sponsors/digitalocean.svg"
-      },
-      {
-        name: "GitHub",
-        url: "https://github.com",
-        img: "./sponsors/github.svg"
-      },
-      {
-        name: "Twilio",
-        url: "https://twilio.com",
-        img: "./sponsors/twilio.svg"
-      }
-    ],
-    communities: [
-      {
-        name: "Angular Frankfurt",
-        url: "https://www.meetup.com/Angular-Frankfurt/"
-      },
-      {
-        name: "ASP.NET Core Rhein Main",
-        url: "https://www.meetup.com/NET-Core-Rhein-Main/"
-      },
-      {
-        name: "Code Review",
-        url: "https://www.meetup.com/code-review/"
-      },
-      {
-        name: "CSS Frankfurt",
-        url: "https://cssfrankfurt.de"
-      },
-      {
-        name: "Elixir Meetup Rhein Main",
-        url: "https://www.meetup.com/Elixir-Meetup-Rhein-Main/"
-      },
-      {
-        name: "Frankfurt Data Science",
-        url: "https://www.meetup.com/FrankfurtDataScience/"
-      },
-      {
-        name: "Frontend RheinMain",
-        url: "https://www.meetup.com/frontend_rm/"
-      },
-      {
-        name: "GDG Rhein Main",
-        url: "https://www.meetup.com/gdgrheinmain/"
-      },
-      {
-        name: "Vue.js Frankfurt",
-        url: "https://meetup.com/vuejsfrankfurt"
-      },
-      {
-        name: "Techettes Frankfurt",
-        url: "https://www.meetup.com/Techettes/"
-      },
-      {
-        name: "Women Techmakers Rhein-Main",
-        url: "https://www.meetup.com/Women-Techmakers-Frankfurt_Rhein-Main/"
-      }
-    ]
-  }),
-  computed: {
-    stats() {
-      const statsArray = [
+    stats: [
         {
           name: "Communities",
           number: "10+"
@@ -151,16 +52,16 @@ export default {
         },
         {
           name: "Sponsors",
-          number: this.sponsors.length
+          number: "10"
         }
-      ];
-      return statsArray;
-    }
-  },
-  methods: {
-    ...mapActions({
-      login: "login/login"
-    })
+      ]
+  }),
+  computed: {
+    // GET COMMUNITY AND SPONSOR LIST FROM THE STORE
+    ...mapState({
+      communities: state => state.communities.communities,
+      sponsors: state => state.sponsors.sponsors
+  })
   }
 };
 </script>
