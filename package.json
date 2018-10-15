@@ -34,7 +34,7 @@
     "socket.io": "^2.1.1"
   },
   "devDependencies": {
-    "eslint": "^5.6.01",
+    "eslint": "^5.6.1",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^7.0.1",
