@@ -30,8 +30,8 @@ router.get('/login', (req, res, next) => {
   debug('[AUTH] Redirecting to Github Authorization');
   res.send(
     'https://github.com/login/oauth/authorize?' +
-      `client_id=${key}&scope=read:user` +
-      `&redirect_uri=${callbackUrl}`
+    `client_id=${key}&scope=read:user` +
+    `&redirect_uri=${callbackUrl}`
   );
 });
 
@@ -111,30 +111,28 @@ router.get('/data', async (req, res, next) => {
               type: 'oauth',
               token: [users[i].accessToken]
             });
-            const result = await paginate(
+            const pullRequests = await paginate(
               octokit,
-              octokit.activity.getEventsForUser,
-              [users[i].login]
-            );
-            result.forEach(obj => {
-              if (
-                obj.type === 'PullRequestEvent' &&
-                obj.payload.action === 'opened' &&
-                new Date(obj.payload.pull_request.created_at) >
-                  new Date('2018-10-01')
-              ) {
-                prsPerUser[users[i].login] = {
-                  latestPr:
-                    prsPerUser[users[i].login].latestPr ||
-                    obj.payload.pull_request.created_at
-                      .split('T')[1]
-                      .split('.')[0],
-                  latestProject:
-                    prsPerUser[users[i].login].latestProject || obj.repo.name,
-                  prs: prsPerUser[users[i].login].prs + 1
-                };
+              octokit.search.issues,
+              {
+                q: `is:pr author:${[users[i].login]} is:public created:>2018-09-30 -label:invalid`,
+                sort: 'created',
+                order: 'desc'
               }
-            });
+            );
+
+            if (!pullRequests.items.length) {
+              continue;
+            }
+
+            prsPerUser[users[i].login] = {
+              latestPr: pullRequests.items[0].created_at
+                .split('T')[1]
+                .split('.')[0],
+              latestProject: pullRequests.items[0].repository_url
+                .match(/https:\/\/api\.github\.com\/repos\/(.*)/)[1],
+              prs: pullRequests.total_count
+            };
           } catch (err) {
             console.error(err);
             console.error(users[i].login, users[i].accessToken);
