@@ -3,6 +3,7 @@
       <router-link class="footer-link" to="/coc">Code of Conduct</router-link>
       <a class="footer-link" href="https://twitter.com/hacktoberffm">@hacktoberffm</a>
       <a class="footer-link" href="https://hacktoberfest.digitalocean.com">Official Website</a>
+      <a class="footer-link" href="https://github.com/cssfrankfurt/hacktoberfest2018">Repository</a>
   </footer>
 </template>
 
